@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "fce46925-1750-49ed-abfb-d4626ef538dc",
+  "uuid": "a5ef60a4-9809-46ab-bfbe-95e7faf7d8db",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,10 +9,10 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "2304.w032.n002.936B.p15.936-removebg-preview_19": {
+    "ezgif.com-crop (1)": {
       "ver": "1.0.4",
-      "uuid": "26a9489a-75e9-4d22-b580-2fd267cae6cd",
-      "rawTextureUuid": "fce46925-1750-49ed-abfb-d4626ef538dc",
+      "uuid": "b2fd06a3-3345-474f-b7f6-7132c6625190",
+      "rawTextureUuid": "a5ef60a4-9809-46ab-bfbe-95e7faf7d8db",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
@@ -20,10 +20,10 @@
       "offsetY": 0,
       "trimX": 0,
       "trimY": 0,
-      "width": 375,
-      "height": 53,
-      "rawWidth": 375,
-      "rawHeight": 53,
+      "width": 57,
+      "height": 62,
+      "rawWidth": 57,
+      "rawHeight": 62,
       "borderTop": 0,
       "borderBottom": 0,
       "borderLeft": 0,
