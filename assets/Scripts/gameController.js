@@ -1,16 +1,19 @@
 var Map = require('Map');
+const Emitter = require('mEmitter');
 const DICE_DIRECTION = {
     LEFT: 1,
     RIGHT: 2,
     UP: 3,
     DOWN: 4
 };
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         map:cc.Node,
         dice: cc.Node,
+        _level: '',
         btnHolder: cc.Node
     },
 
@@ -27,14 +30,27 @@ cc.Class({
     },
 
     log() {
-        this.mapCols = 6;
+      let newMap = new Map(6, 8);
+        newMap.setWall([[2, 1], [1, 1]], 'bottom');
+        this.map.getComponent('MapController').renderMap(newMap)
+        cc.log(this.map.getComponent('MapController').tiles)
+       this.mapCols = 6;
         this.mapRows = 8;
         let newMap=new Map(this.mapCols, this.mapRows);
         newMap.setWall([[2,1],[1,1]],'bottom');
         this.map.getComponent('MapController').renderMap(newMap);
-        
     },
 
+        
+    onUnlock(){
+        let level = this._level;
+        let matches = level.match(/\d+/);
+        let currentLevel = parseInt(matches[0]);
+        let newLevel = currentLevel + 1;
+        let levelUnlock = level.replace(/\d+/, newLevel);
+
+        Emitter.instance.emit('COMPLETE_LEVEL', {level, levelUnlock});
+    },
     setupDice() {
         this.dice.position = this.tilesMap[2][2].position;
         //this.btnHolder.position = this.dice.position;
@@ -47,7 +63,6 @@ cc.Class({
     moveDice(event, direction) {
         if (this.isMovingDice) return;
         this.btnHolder.active = false;
-
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
 
