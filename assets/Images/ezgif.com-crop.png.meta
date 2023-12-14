@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "da292a1d-87cc-4547-9630-4f6e0cb93027",
+  "uuid": "9095884b-d2a0-4c26-9476-06f0780c1a94",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,7 +11,7 @@
   "subMetas": {
     "ezgif.com-crop": {
       "ver": "1.0.4",
-      "uuid": "13237cb5-cd4f-4055-af50-a35e40281799",
+      "uuid": "aeeb6038-1e38-4e1e-ada4-0f54dfa14e50",
       "rawTextureUuid": "da292a1d-87cc-4547-9630-4f6e0cb93027",
       "trimType": "auto",
       "trimThreshold": 1,
