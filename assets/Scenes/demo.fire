@@ -156,7 +156,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 535.5284590652022
+      "z": 525.6774200971543
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -230,7 +230,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Controller",
+    "_name": "GameController",
     "_objFlags": 0,
     "_parent": {
       "__id__": 1
@@ -264,8 +264,8 @@
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": 320,
+      "y": 480,
       "z": 0
     },
     "_scale": {
@@ -284,7 +284,7 @@
     "_skewY": 0,
     "_is3DNode": false,
     "groupIndex": 0,
-    "_id": "42SkG/KnBG77onEKj8HOq8"
+    "_id": "8chg4oaL9BLoWhY6rZfXIq"
   },
   {
     "__type__": "ba0e2Qxs25Pgqrm265h5PbB",
@@ -300,10 +300,11 @@
     "dice": {
       "__id__": 9
     },
+    "_level": "",
     "btnHolder": {
       "__id__": 11
     },
-    "_id": "48s175uSRPd660xAF8g7eK"
+    "_id": "60yxRNBtNODb6tUNzRj5MW"
   },
   {
     "__type__": "cc.Node",
@@ -447,7 +448,7 @@
         "__id__": 11
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 4,
     "_components": [],
     "_prefab": null,
@@ -1918,9 +1919,7 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": {
-      "__id__": 6
-    },
+    "target": null,
     "component": "",
     "_componentId": "ba0e2Qxs25Pgqrm265h5PbB",
     "handler": "showBtnDirection",
