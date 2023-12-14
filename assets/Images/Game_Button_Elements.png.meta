@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "4942a06c-2f65-4745-bf54-5649a471d1d5",
+  "uuid": "09b94057-8e28-48d6-acbe-16cb907c9cce",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "Game_Button_Elements": {
       "ver": "1.0.4",
-      "uuid": "7ea68eae-44c4-4714-b8b5-0dcce5d9e793",
-      "rawTextureUuid": "4942a06c-2f65-4745-bf54-5649a471d1d5",
+      "uuid": "def718bc-1a3b-45d7-aa91-1901895e61ab",
+      "rawTextureUuid": "d6b92515-601c-447a-a705-839621a4c79b",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

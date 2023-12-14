@@ -1,0 +1,34 @@
+{
+  "ver": "2.3.3",
+  "uuid": "e1f54747-3043-4c79-8f38-22c84753dfea",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+    "Hố đen": {
+      "ver": "1.0.4",
+      "uuid": "b50fbcd3-e16f-406e-81b8-5497811d393c",
+      "rawTextureUuid": "ddbd0467-f1bb-4551-86ee-4a11f1215309",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 1,
+      "offsetY": 1.5,
+      "trimX": 27,
+      "trimY": 34,
+      "width": 164,
+      "height": 165,
+      "rawWidth": 216,
+      "rawHeight": 236,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
