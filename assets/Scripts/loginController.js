@@ -19,7 +19,7 @@ cc.Class({
         this.player ={
             namePlayer:this.nameEditBox.string,
         }
-        cc.log(this.player)
+        cc.director.loadScene("UI_Level_Page");
     },
     onShowSettingPage(){
         this.nameEditBox.enabled = false;

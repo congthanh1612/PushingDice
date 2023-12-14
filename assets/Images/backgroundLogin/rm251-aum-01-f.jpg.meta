@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "4eb4d432-a5c8-4911-889c-604c3b9f5513",
+  "uuid": "1fb0efb0-b374-4d22-94fd-006bf59534b2",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "rm251-aum-01-f": {
       "ver": "1.0.4",
-      "uuid": "1ee5bd2b-797a-4795-a5dc-f0fe27696332",
-      "rawTextureUuid": "4eb4d432-a5c8-4911-889c-604c3b9f5513",
+      "uuid": "f3bf4b6e-076d-44f2-972e-626090baa387",
+      "rawTextureUuid": "1fb0efb0-b374-4d22-94fd-006bf59534b2",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
