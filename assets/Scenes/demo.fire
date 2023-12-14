@@ -526,7 +526,7 @@
       }
     ],
     "_prefab": null,
-    "_opacity": 255,
+    "_opacity": 100,
     "_color": {
       "__type__": "cc.Color",
       "r": 255,
@@ -1944,6 +1944,9 @@
       }
     ],
     "tiles": [],
+    "spriteDestination": {
+      "__uuid__": "698efbac-9f26-42af-84d9-761c5026eddb"
+    },
     "_id": "237O08f0hL4JCvQnCttWBY"
   }
 ]

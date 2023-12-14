@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         atlas: [cc.SpriteAtlas],
         prefabs: [cc.Prefab],
-        tiles: [cc.Node]
+        tiles: [cc.Node],
+        spriteDestination:cc.SpriteFrame
     },
 
     // onLoad () {},
@@ -35,6 +36,9 @@ cc.Class({
                 }
                 if (checkArrayInArray2D(id,map.wallBottom)) {
                     newTile.getChildByName('bottom').active = true;
+                }
+                if(id[0]==map.destination[0]&&id[1]==map.destination[1]){ 
+                    newTile.getComponent(cc.Sprite).spriteFrame=this.spriteDestination; 
                 }
             }
         }
