@@ -1,4 +1,6 @@
 var Map = require('Map');
+const Emitter = require('mEmitter');
+
 const DICE_DIRECTION = {
     LEFT: 1,
     RIGHT: 2,
@@ -11,7 +13,8 @@ cc.Class({
     properties: {
         map:cc.Node,
         dice: cc.Node,
-        btnHolder: cc.Node
+        btnHolder: cc.Node,
+        _level: '',
     },
 
     onLoad() {
@@ -33,6 +36,16 @@ cc.Class({
         newMap.setWall([[2,1],[1,1]],'bottom');
         this.map.getComponent('MapController').renderMap(newMap);
         
+    },
+
+    onUnlock(){
+        let level = this._level;
+        let matches = level.match(/\d+/);
+        let currentLevel = parseInt(matches[0]);
+        let newLevel = currentLevel + 1;
+        let levelUnlock = level.replace(/\d+/, newLevel);
+
+        Emitter.instance.emit('COMPLETE_LEVEL', {level, levelUnlock});
     },
 
     setupDice() {

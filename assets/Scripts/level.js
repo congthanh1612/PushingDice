@@ -25,7 +25,8 @@ cc.Class({
             this.node.children[0].active = true;
             this.node.getComponent(cc.Sprite)._spriteFrame = this.levelUnlock;
         }
-    }
+    },
+
 });
 
 // Color unlock: new cc.Color(53, 150, 255); #3596FF
