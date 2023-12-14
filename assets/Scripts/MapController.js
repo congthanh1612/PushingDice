@@ -13,7 +13,7 @@ cc.Class({
 
     },
     renderMap(map) {
-        this.destroyChildrenNode();
+        //this.destroyChildrenNode();
         this.tiles = [];
         for (let row = 0; row < map.y; row++) {
             this.tiles.push([])
