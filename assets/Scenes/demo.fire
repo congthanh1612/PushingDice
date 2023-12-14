@@ -54,7 +54,7 @@
     "_is3DNode": true,
     "groupIndex": 0,
     "autoReleaseAssets": false,
-    "_id": "2528028c-5730-4ea0-8133-7d8c134c8cc2"
+    "_id": "e543284a-bbf8-45e0-a74f-20fd3ef77320"
   },
   {
     "__type__": "cc.Node",
@@ -156,7 +156,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 525.6774200971543
+      "z": 245.08518927099615
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -300,7 +300,6 @@
     "dice": {
       "__id__": 9
     },
-    "_level": "",
     "btnHolder": {
       "__id__": 11
     },
@@ -1919,7 +1918,9 @@
   },
   {
     "__type__": "cc.ClickEvent",
-    "target": null,
+    "target": {
+      "__id__": 6
+    },
     "component": "",
     "_componentId": "ba0e2Qxs25Pgqrm265h5PbB",
     "handler": "showBtnDirection",
@@ -1945,7 +1946,7 @@
     ],
     "tiles": [],
     "spriteDestination": {
-      "__uuid__": "698efbac-9f26-42af-84d9-761c5026eddb"
+      "__uuid__": "cf5b94e5-a930-4de9-8693-7ce96e355e82"
     },
     "_id": "237O08f0hL4JCvQnCttWBY"
   }

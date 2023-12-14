@@ -9,38 +9,39 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        map:cc.Node,
+        map: cc.Node,
         dice: cc.Node,
         btnHolder: cc.Node
     },
 
     onLoad() {
         this.log();
-        this.dice.zIndex=999
-        this.tilesMap = this.map.getComponent("MapController").tiles; 
-        this.setupDice()
+        this.dice.zIndex = 999
+        this.tilesMap = this.map.getComponent("MapController").tiles;
+        this.setupDice();
+        this.posStart = null;
     },
 
     start() {
-        
-        
+
+
     },
 
     log() {
-        this.mapCols = 6;
-        this.mapRows = 8;
-        let newMap=new Map(this.mapCols, this.mapRows);
-        newMap.setWall([[2,1],[1,1]],'bottom');
-        this.map.getComponent('MapController').renderMap(newMap);
-        
+        let newMap = new Map();
+        newMap.setWall([[0,5]], 'left');
+        newMap.setStart(3,0);
+        newMap.setDestination(0,5);
+        this.posStart = this.map.getComponent('MapController').renderMap(newMap);
     },
 
     setupDice() {
-        this.dice.position = this.tilesMap[2][2].position;
+        ///cc.log(this.posStart)
+        this.dice.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
         //this.btnHolder.position = this.dice.position;
         this.currentDicePos = {
-            col: 2,
-            row: 2
+            col: this.posStart[1],
+            row: this.posStart[0]
         };
     },
 
@@ -53,24 +54,24 @@ cc.Class({
 
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
-                if(col > 0) {
+                if (col > 0) {
                     col -= 1;
-                }               
+                }
                 break;
             case DICE_DIRECTION.RIGHT:
-                if(col < this.mapCols - 1) {
+                if (col < this.mapCols - 1) {
                     col += 1;
                 }
                 break;
             case DICE_DIRECTION.UP:
-                if(row > 0 ){
+                if (row > 0) {
                     row -= 1;
                 }
                 break;
             case DICE_DIRECTION.DOWN:
-                if(row < this.mapRows - 1) {
+                if (row < this.mapRows - 1) {
                     row += 1;
-                }             
+                }
                 break;
         }
 
@@ -78,13 +79,11 @@ cc.Class({
             col,
             row
         };
-
         this.isMovingDice = true;
         const targetPosition = this.tilesMap[row][col].position;
-        cc.log(targetPosition)
+        //cc.log(targetPosition)
         if (-1 < row < this.mapRows && -1 < col < this.mapCols) {
             const targetPosition = this.tilesMap[row][col].position;
-    
             if (targetPosition) {
                 this.dice.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
@@ -99,11 +98,10 @@ cc.Class({
             cc.error("Vị trí mới nằm ngoài biên của lưới.");
         }
     },
-
     showBtnDirection() {
         //this.btnHolder.position = this.dice.position;
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.mapCols, this.mapRows);
-        cc.log('btnHolder',this.btnHolder.position);
+        //cc.log('btnHolder', this.btnHolder.position);
     },
 });
