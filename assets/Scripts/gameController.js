@@ -36,6 +36,9 @@ cc.Class({
     log() {
         this.newMap = new Map();
         this.newMap.setWall([[0, 5]], 'left');
+        this.newMap.setWall([[3,0],[3,1]],'right')
+        this.newMap.setWall([[3,0],[3,1]],'top')
+        this.newMap.setWall([[4,0],[4,1]],'bottom')
         this.newMap.setStart(3, 0);
         this.newMap.setDestination(0, 5);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
@@ -114,7 +117,7 @@ cc.Class({
     },
     showBtnDirection() {
         this.btnHolder.active = true;
-        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows);
+        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows,this.newMap);
         this.onDiceFaces();
     },
 
