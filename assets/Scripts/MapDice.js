@@ -40,6 +40,10 @@ class MapDice{
     setDiceFaces() {
         return [this.secondRow[2],this.secondRow[0],this.thirdRow[1], this.firstRow[1]].map(String);
     }
+
+    getDiceFace() {
+        return this.diceFace;
+    }
 }
 
 module.exports=MapDice;

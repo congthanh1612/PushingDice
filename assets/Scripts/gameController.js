@@ -16,11 +16,12 @@ cc.Class({
             type: [cc.Label],
             default: [],
         }
+        
     },
 
     onLoad() {
         this.log();
-        //cc.log(this.diceController);
+        this.countMove = 0;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
@@ -29,7 +30,6 @@ cc.Class({
     },
 
     start() {
-
 
     },
 
@@ -44,13 +44,12 @@ cc.Class({
     setupDice() {
         this.diceController.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
         this.currentDicePos = {
-            col: this.posStart[1],
-            row: this.posStart[0]
+            row: this.posStart[0],
+            col: this.posStart[1]  
         };
     },
 
     moveDice(event, direction) {
-        cc.log('aaa',this.newMap.cols,this.newMap.rows )
         if (this.isMovingDice) return;
         this.btnHolder.active = false;
 
@@ -65,7 +64,7 @@ cc.Class({
                 }
                 break;
             case DICE_DIRECTION.RIGHT:
-                if (col < this.newMap.rows - 1) {
+                if (col < this.newMap.cols - 1) {
                     col += 1;
                     this.dice.Right()
                 }
@@ -77,7 +76,7 @@ cc.Class({
                 }
                 break;
             case DICE_DIRECTION.DOWN:
-                if (row < this.newMap.cols - 1) {
+                if (row < this.newMap.rows - 1) {
                     row += 1;
                     this.dice.Down()
                 }
@@ -85,9 +84,10 @@ cc.Class({
         }
 
         this.currentDicePos = {
-            col,
-            row
+            row,
+            col
         };
+        
         this.isMovingDice = true;
         if (-1 < row < this.newMap.rows && -1 < col < this.newMap.cols) {
             const targetPosition = this.tilesMap[row][col].position;
@@ -95,7 +95,15 @@ cc.Class({
                 this.diceController.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
+                        this.countMove++;
+                        if(row === 0 && col ===5 && this.dice.getDiceFace() ===6 ){
+                            alert('You Win')
+                        }
+                        else if(row === 0 && col ===5 && this.dice.getDiceFace() !=6 || this.countMove ===10 ){
+                            alert('you lose')
+                        };
                         this.isMovingDice = false;
+                        
                     })
                 ));
             }
@@ -103,13 +111,10 @@ cc.Class({
                 cc.error("ô trên không hợp lệ.");
             }
         }
-        // else {
-        //     cc.error("Vị trí mới nằm ngoài biên của lưới.");
-        // }
     },
     showBtnDirection() {
         this.btnHolder.active = true;
-        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.rows, this.newMap.cols);
+        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows);
         this.onDiceFaces();
     },
 
@@ -117,5 +122,5 @@ cc.Class({
         this.diceFace = this.dice.getDiceFaces().map((str, index) => {
             this.btnHolder.emit("UPDATE_DICE_NUMBER", str, index + 1);
         });
-    }
+    },
 });
