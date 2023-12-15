@@ -12,21 +12,23 @@ cc.Class({
         map: cc.Node,
         diceController: cc.Node,
         btnHolder: cc.Node,
+        moves: cc.Label,
+
         diceFace: {
             type: [cc.Label],
             default: [],
-        }
-        
+        } 
     },
 
     onLoad() {
         this.log();
-        this.countMove = 0;
+        this.countMove = 16;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
         this.posStart = null;
         this.dice = this.diceController.getComponent("DiceController")
+        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
     },
 
     start() {
@@ -98,15 +100,17 @@ cc.Class({
                 this.diceController.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
-                        this.countMove++;
+                        this.countMove--;
+                        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
                         if(row === 0 && col ===5 && this.dice.getDiceFace() ===6 ){
                             alert('You Win')
+                            this.diceController.active = false;
                         }
-                        else if(row === 0 && col ===5 && this.dice.getDiceFace() !=6 || this.countMove ===10 ){
+                        else if(row === 0 && col ===5 && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
                             alert('you lose')
+                            this.diceController .active = false;
                         };
                         this.isMovingDice = false;
-                        
                     })
                 ));
             }
