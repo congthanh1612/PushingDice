@@ -42,6 +42,9 @@ cc.Class({
 
     getDiceFaces(){ 
         return this.dice.setDiceFaces()
+    },
+    getDiceFace(){
+        return this.dice.diceFace;
     }
     
 
