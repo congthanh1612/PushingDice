@@ -33,6 +33,13 @@ class MapDice{
         this.diceFace=this.secondRow[1];
         return this.diceFace-1;
     }
+    // getDirections(){
+    //     return [this.secondRow[2],this.secondRow[0],this.thirdRow[1], this.firstRow[1]]
+    // }
+
+    setDiceFaces() {
+        return [this.secondRow[2],this.secondRow[0],this.thirdRow[1], this.firstRow[1]].map(String);
+    }
 }
 
 module.exports=MapDice;
