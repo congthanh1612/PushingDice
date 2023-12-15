@@ -38,7 +38,8 @@ cc.Class({
                     newTile.getChildByName('bottom').active = true;
                 }
                 if(id[0]==map.destination[0]&&id[1]==map.destination[1]){ 
-                    newTile.getComponent(cc.Sprite).spriteFrame=this.spriteDestination; 
+                    newTile.getComponent(cc.Sprite).spriteFrame=this.spriteDestination;
+                    newTile.getChildByName('EndHoleText').active = true;
                 }
             }
         }
