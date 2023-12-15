@@ -20,31 +20,38 @@ cc.Class({
 
     onLoad() {
         this.log();
-        this.diceController.zIndex=999
-        this.tilesMap = this.map.getComponent("MapController").tiles; 
+        this.diceController.zIndex = 999
+        this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
+        this.posStart = null;
         this.dice=this.diceController.getComponent("DiceController")
     },
 
     start() {
-        
-        
+
+
     },
 
     log() {
-        // this.newMap.x = 6;
-        // this.newMap.y = 8;
-        this.newMap=new Map(6, 8);
-        this.newMap.setWall([[2,1],[1,1]],'bottom');
-        this.map.getComponent('MapController').renderMap(this.newMap);
+
+    setupDice() {
+        ///cc.log(this.posStart)
+        this.dice.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
+        //this.btnHolder.position = this.dice.position;
+
+        this.newMap = new Map();
+        this.newMap.setWall([[0,5]], 'left');
+        this.newMap.setStart(3,0);
+        this.newMap.setDestination(0,5);
+        this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
         
     },
 
     setupDice() {
-        this.diceController.position = this.tilesMap[2][2].position;
+         this.diceController.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
         this.currentDicePos = {
-            col: 2,
-            row: 2
+            col: this.posStart[1],
+            row: this.posStart[0]
         };
     },
 
@@ -57,7 +64,7 @@ cc.Class({
 
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
-                if(col > 0) {
+                if (col > 0) {
                     col -= 1;
                     this.dice.Left();
                 }               
@@ -69,7 +76,7 @@ cc.Class({
                 }
                 break;
             case DICE_DIRECTION.UP:
-                if(row > 0 ){
+                if (row > 0) {
                     row -= 1;
                     this.dice.Up()
                 }
@@ -86,12 +93,9 @@ cc.Class({
             col,
             row
         };
-
         this.isMovingDice = true;
-        cc.log('testmove', this.isMovingDice)
         if (-1 < row < this.newMap.y && -1 < col < this.newMap.x) {
             const targetPosition = this.tilesMap[row][col].position;
-    
             if (targetPosition) {
                 this.diceController.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
@@ -108,7 +112,6 @@ cc.Class({
         //     cc.error("Vị trí mới nằm ngoài biên của lưới.");
         // }
     },
-
     showBtnDirection() {
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.x, this.newMap.y);

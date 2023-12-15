@@ -156,7 +156,8 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 499.6896867690846
+      "z": 245.08518927099615
+
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -1958,6 +1959,9 @@
       }
     ],
     "tiles": [],
+    "spriteDestination": {
+      "__uuid__": "cf5b94e5-a930-4de9-8693-7ce96e355e82"
+    },
     "_id": "237O08f0hL4JCvQnCttWBY"
   }
 ]

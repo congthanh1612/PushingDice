@@ -1,12 +1,14 @@
 import { checkArrayInArray2D } from './CheckValue.js';
 class Map {
-    constructor(x, y) {
-        this.x = x;
-        this.y = y;
+    constructor(cols=6, rows=8) {
+        this.rows = rows;
+        this.cols = cols;
         this.wallLeft = [];
         this.wallRight = [];
         this.wallTop = [];
         this.wallBottom = [];
+        this.destination=[5,5];
+        this.start=[0,0];
     }
     setWall(value, key) {
         let wall = []
@@ -55,11 +57,25 @@ class Map {
     }
     checkPosition(x, y) {
         if (x >= 0 && y >= 0) {
-            if (x < this.x && y < this.y) {
+            if (x < this.cols && y < this.rows) {
                 return true;
             }
         }
         return false;
+    }
+    setDestination(x,y){ 
+        if (this.checkPosition(y, x)) { 
+            this.destination=[x,y]; 
+            return true 
+        } 
+        return false; 
+    }
+    setStart(x,y){ 
+        if (this.checkPosition(y, x)) { 
+            this.start=[x,y]; 
+            return true 
+        } 
+        return false; 
     }
 }
 
