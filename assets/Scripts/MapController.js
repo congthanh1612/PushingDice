@@ -42,6 +42,7 @@ cc.Class({
                 }
             }
         }
+        
         return [map.start[0],map.start[1]];
     },
 
