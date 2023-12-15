@@ -10,15 +10,20 @@ cc.Class({
 
     properties: {
         map:cc.Node,
-        dice: cc.Node,
-        btnHolder: cc.Node
+        diceController: cc.Node,
+        btnHolder: cc.Node,
+        diceFace: {
+            type: [cc.Label], 
+            default: [],
+        }
     },
 
     onLoad() {
         this.log();
-        this.dice.zIndex=999
+        this.diceController.zIndex=999
         this.tilesMap = this.map.getComponent("MapController").tiles; 
-        this.setupDice()
+        this.setupDice();
+        this.dice=this.diceController.getComponent("DiceController")
     },
 
     start() {
@@ -27,17 +32,16 @@ cc.Class({
     },
 
     log() {
-        this.mapCols = 6;
-        this.mapRows = 8;
-        let newMap=new Map(this.mapCols, this.mapRows);
-        newMap.setWall([[2,1],[1,1]],'bottom');
-        this.map.getComponent('MapController').renderMap(newMap);
+        // this.newMap.x = 6;
+        // this.newMap.y = 8;
+        this.newMap=new Map(6, 8);
+        this.newMap.setWall([[2,1],[1,1]],'bottom');
+        this.map.getComponent('MapController').renderMap(this.newMap);
         
     },
 
     setupDice() {
-        this.dice.position = this.tilesMap[2][2].position;
-        //this.btnHolder.position = this.dice.position;
+        this.diceController.position = this.tilesMap[2][2].position;
         this.currentDicePos = {
             col: 2,
             row: 2
@@ -46,7 +50,7 @@ cc.Class({
 
     moveDice(event, direction) {
         if (this.isMovingDice) return;
-        this.btnHolder.active = false;
+        this.btnHolder.active = false;  
 
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
@@ -55,21 +59,25 @@ cc.Class({
             case DICE_DIRECTION.LEFT:
                 if(col > 0) {
                     col -= 1;
+                    this.dice.Left();
                 }               
                 break;
             case DICE_DIRECTION.RIGHT:
-                if(col < this.mapCols - 1) {
+                if(col < this.newMap.x - 1) {
                     col += 1;
+                    this.dice.Right()
                 }
                 break;
             case DICE_DIRECTION.UP:
                 if(row > 0 ){
                     row -= 1;
+                    this.dice.Up()
                 }
                 break;
             case DICE_DIRECTION.DOWN:
-                if(row < this.mapRows - 1) {
+                if(row < this.newMap.y - 1) {
                     row += 1;
+                    this.dice.Down()
                 }             
                 break;
         }
@@ -80,30 +88,36 @@ cc.Class({
         };
 
         this.isMovingDice = true;
-        const targetPosition = this.tilesMap[row][col].position;
-        cc.log(targetPosition)
-        if (-1 < row < this.mapRows && -1 < col < this.mapCols) {
+        cc.log('testmove', this.isMovingDice)
+        if (-1 < row < this.newMap.y && -1 < col < this.newMap.x) {
             const targetPosition = this.tilesMap[row][col].position;
     
             if (targetPosition) {
-                this.dice.runAction(cc.sequence(
+                this.diceController.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.isMovingDice = false;
                     })
                 ));
-            } else {
+            } 
+            else {
                 cc.error("ô trên không hợp lệ.");
             }
-        } else {
-            cc.error("Vị trí mới nằm ngoài biên của lưới.");
-        }
+        } 
+        // else {
+        //     cc.error("Vị trí mới nằm ngoài biên của lưới.");
+        // }
     },
 
     showBtnDirection() {
-        //this.btnHolder.position = this.dice.position;
         this.btnHolder.active = true;
-        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.mapCols, this.mapRows);
-        cc.log('btnHolder',this.btnHolder.position);
+        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.x, this.newMap.y);
+        this.onDiceFaces();
     },
+    
+    onDiceFaces() {
+        this.diceFace = this.dice.getDiceFaces().map((str, index) => {
+            this.btnHolder.emit("UPDATE_DICE_NUMBER", str, index + 1);
+        });
+    }
 });
