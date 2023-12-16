@@ -38,7 +38,6 @@ cc.Class({
         this.btnRight.active = !isRightEdge;
         this.btnUp.active = !isTopEdge;
         this.btnDown.active = !isBottomEdge;
-        cc.log('left',this.btnLeft)
     },
 
     updateDiceNumber(number, direction) {
