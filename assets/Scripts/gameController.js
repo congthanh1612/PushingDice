@@ -5,30 +5,39 @@ const DICE_DIRECTION = {
     UP: 3,
     DOWN: 4
 };
+var newNode;
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        levelScreen: cc.Node,
+        canvas: cc.Node,
         map: cc.Node,
         diceController: cc.Node,
         btnHolder: cc.Node,
         moves: cc.Label,
+        popupSettings: cc.Node,
+        popupGameOver: cc.Node,
+        popupWinGame: cc.Node,
 
         diceFace: {
             type: [cc.Label],
             default: [],
-        } 
+        },
+        _countMove: 0
     },
 
     onLoad() {
+        newNode = cc.instantiate(this.node.parent);
         this.log();
-        this.countMove = 16;
+        this.countMove = 1;
+        this._countMove = this.countMove;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
         // this.posStart = null;
         this.dice = this.diceController.getComponent("DiceController")
-        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
         cc.log(this.dice._indexDice)
     },
 
@@ -101,14 +110,14 @@ cc.Class({
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.countMove--;
-                        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+                        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
                         if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() ===6 ){
-                            alert('You Win')
-                            this.diceController.active = false;
+                            this.showWinGame();
+                            //this.diceController.active = false;
                         }
                         else if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
-                            alert('you lose')
-                            this.diceController .active = false;
+                            this.showGameOver();
+                            //this.diceController .active = false;
                         };
                         this.isMovingDice = false;
                         this.showBtnDirection();
@@ -145,7 +154,29 @@ cc.Class({
         this.diceController.zIndex = 999
         this.dice.resetDiceFace();
         this.countMove = 16;
-        this.moves.getComponent(cc.Label).string = 'Moves: '+ this.countMove;
+        this._countMove = this.countMove;
+        // this.popupGameOver.active = false;
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
         this.showBtnDirection();
     },
+
+    showGameOver(){
+        this.popupGameOver.active = true;
+    },
+
+    showWinGame(){
+        this.popupWinGame.active = true;
+    },
+
+    onRestart(){
+        this.node.parent.destroy();
+        this.canvas.addChild(newNode);
+    },
+    
+    onBackLevel(){
+        this.popupGameOver.active=false;
+        this.node.parent.active =false;
+        this.diceController.active = false;
+        this.levelScreen.active=true;
+    }
 });

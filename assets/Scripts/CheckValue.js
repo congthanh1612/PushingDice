@@ -16,4 +16,4 @@ function checkArrayInArray2D(array1D, array2D) {
     }
     return false;
 }
-export {checkArrayInArray2D};
+export { checkArrayInArray2D };

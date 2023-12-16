@@ -1,33 +1,31 @@
 const Emitter = require('mEmitter');
+const audioEngine = cc.audioEngine;
 
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        levelLock: cc.SpriteFrame,
-        levelUnlock: cc.SpriteFrame,
-        
-    },
-
-    start() {
-        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onCompleteLevel.bind(this));
+        soundEffect: {
+            default: [],
+            type: [cc.AudioClip],
+        },
     },
 
     selectedLevel() {
         let isLock = this.node.children[0].active;
         if (isLock) {
+            this.playEffect();
             let level = this.node.name;
             Emitter.instance.emit('SELECTED_LEVEL', level);
+            // window.globalData = {
+            //     selectedLevel: this.node.name,
+            // };
+        }
+    }, 
+
+    playEffect() {
+        if (this.soundEffect[0]) {
+            audioEngine.playEffect(this.soundEffect[0], false);
         }
     },
-
-    onCompleteLevel(data) {
-        if (data.levelUnlock == this.node.name) {
-            this.node.children[0].active = true;
-            this.node.getComponent(cc.Sprite)._spriteFrame = this.levelUnlock;
-        }
-    }
 });
-
-// Color unlock: new cc.Color(53, 150, 255); #3596FF
-// Color lock: new cc.Color(29, 82, 139); #1D528B

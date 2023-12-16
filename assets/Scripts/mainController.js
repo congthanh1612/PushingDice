@@ -17,6 +17,10 @@ cc.Class({
     },
 
     onLoad() {
+        cc.view.setResizeCallback(() => {
+            this.adjustSize();
+        });
+        this.adjustSize();
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onUnlockNextLevel.bind(this));
