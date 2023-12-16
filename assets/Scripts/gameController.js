@@ -26,9 +26,10 @@ cc.Class({
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
-        this.posStart = null;
+        // this.posStart = null;
         this.dice = this.diceController.getComponent("DiceController")
         this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+        cc.log(this.dice._indexDice)
     },
 
     start() {
@@ -130,5 +131,21 @@ cc.Class({
         this.diceFace = this.dice.getDiceFaces().map((str, index) => {
             this.btnHolder.emit("UPDATE_DICE_NUMBER", str, index + 1);
         });
+    },
+
+    undoDice() {
+
+    },
+    replayGame(event) { 
+        return this.gameStartState();
+    },
+
+    gameStartState(){
+        this.setupDice(); 
+        this.diceController.zIndex = 999
+        this.dice.resetDiceFace();
+        this.countMove = 16;
+        this.moves.getComponent(cc.Label).string = 'Moves: '+ this.countMove;
+        this.showBtnDirection();
     },
 });

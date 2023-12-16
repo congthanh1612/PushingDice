@@ -35,17 +35,20 @@ cc.Class({
         this.changeAtlas(this._indexDice);
     },
 
-    // getDiceDirections(){
-    //     return this.dice.getDirections()
-        
-    // },
-
     getDiceFaces(){ 
         return this.dice.setDiceFaces()
     },
-    getDiceFace(){
-        return this.dice.diceFace;
+
+    resetDiceFace(){
+        this.dice=new MapDice(  [0,3,0],
+            [5,1,2],
+            [0,4,0]);
+        this._indexDice=0,
+        this.changeAtlas(this._indexDice);
     }
+    // getDiceFace(){
+    //     return this.dice.diceFace;
+    // }
     
 
 });
