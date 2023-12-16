@@ -57,7 +57,6 @@ cc.Class({
     moveDice(event, direction) {
         if (this.isMovingDice) return;
         this.btnHolder.active = false;
-
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
 
@@ -102,15 +101,16 @@ cc.Class({
                     cc.callFunc(() => {
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-                        if(row === 0 && col ===5 && this.dice.getDiceFace() ===6 ){
+                        if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() ===6 ){
                             alert('You Win')
                             this.diceController.active = false;
                         }
-                        else if(row === 0 && col ===5 && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
+                        else if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
                             alert('you lose')
                             this.diceController .active = false;
                         };
                         this.isMovingDice = false;
+                        this.showBtnDirection();
                     })
                 ));
             }
@@ -119,9 +119,10 @@ cc.Class({
             }
         }
     },
+
     showBtnDirection() {
         this.btnHolder.active = true;
-        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows,this.newMap);
+        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
         this.onDiceFaces();
     },
 
