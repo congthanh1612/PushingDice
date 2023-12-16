@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "0b531ca3-6cbd-4a2a-80be-1ba357ddaf4a",
+  "uuid": "c08e80f2-823d-47ff-9039-e966a66a3cc8",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "Play Purple": {
       "ver": "1.0.4",
-      "uuid": "1712158e-dd66-412b-a6a5-d2df871c2aa0",
-      "rawTextureUuid": "0b531ca3-6cbd-4a2a-80be-1ba357ddaf4a",
+      "uuid": "e5d0c6db-9ea4-43fa-9d9d-e3347403028d",
+      "rawTextureUuid": "c08e80f2-823d-47ff-9039-e966a66a3cc8",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

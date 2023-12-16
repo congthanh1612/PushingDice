@@ -10,6 +10,10 @@ cc.Class({
         musicSlider: cc.Slider,
         musicSliderPrefab: cc.Slider,
         musicAudio: cc.AudioSource,
+        musicLabelSetting: cc.Label,
+        musicLabelPause: cc.Label,
+        musicButtonSetting: cc.Button,
+        musicButtonPause: cc.Button,
     },
 
     onLoad() {
@@ -25,7 +29,7 @@ cc.Class({
 
     onSelectedLevel(data) {
         this.levelScreen.active = false;
-        this.gameScreen.getComponent('gameController')._level = data;
+        // this.gameScreen.getComponent('gameController')._level = data;
         this.gameScreen.active = true;
 
         let length = this.gameScreen.children.length;
@@ -41,15 +45,33 @@ cc.Class({
         this.gameScreen.active = false;
         this.levelScreen.active = true;
     },
-    onChangeMusic(volume) {
-        this.musicSliderPrefab.progress = volume;
-        this.musicAudio.volume = volume;
-        cc.log('Received music volume change from script 1:', volume);
+    onChangeMusic(data) {
+        this.musicSliderPrefab.progress = data.volume;
+        this.musicAudio.volume = data.volume;
+        this.musicLabelPause.string = data.volume.toFixed(1) * 10;
+        this.musicButtonPause.getComponent(cc.Sprite).spriteFrame = data.spriteFrame;
     },
 
-    onReceiveChangeMusic(volume) {
-        this.musicSlider.progress = volume;
-        this.musicAudio.volume = volume;
-        cc.log('Received music volume change from script 2:', volume);
+    onReceiveChangeMusic(data) {
+        this.musicSlider.progress = data.volume;
+        this.musicAudio.volume = data.volume;
+        this.musicLabelSetting.string = data.volume.toFixed(1) * 10;
+        this.musicButtonSetting.getComponent(cc.Sprite).spriteFrame = data.spriteFrame;
+    },
+    adjustSize() {
+        let screenSize = cc.view.getVisibleSize();
+        let ratio = screenSize.width / screenSize.height;
+
+        let targetRatio = 18 / 9;
+        let newWidth = screenSize.width;
+        let newHeight = screenSize.height;
+
+        if (ratio < targetRatio) {
+            newHeight = screenSize.width / targetRatio;
+        } else {
+            newWidth = screenSize.height * targetRatio;
+        }
+        this.node.width = newWidth;
+        this.node.height = newHeight;
     },
 });

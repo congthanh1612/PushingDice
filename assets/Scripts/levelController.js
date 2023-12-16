@@ -4,11 +4,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        startScreen: cc.Node,
+        startScreen: cc.Layout,
     },
 
     onBack(){
         this.node.active = false;
-        this.startScreen.active = true;
+        this.startScreen.node.active = true;
     }
 });

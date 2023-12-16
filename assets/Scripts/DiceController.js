@@ -4,48 +4,51 @@ cc.Class({
 
     properties: {
         atlas: cc.SpriteAtlas,
-        _mapDice:MapDice,//[[0,3,0],[5,1,2],[0,4,0]],
         _indexDice:1,
-
     },
+
     onLoad() {
-        cc.systemEvent.on(cc.SystemEvent.EventType.KEY_UP, this.onKeyUp, this);
-        this._mapDice=new MapDice(  [0,3,0],
-                                    [5,1,2],
-                                    [0,4,0]);
-        cc.log(this._mapDice)
+        this.dice=new MapDice(  [0,3,0],
+                                [5,1,2],
+                                [0,4,0]);
+        cc.log(this.dice)
     },
 
-    start() {
-
-    },
-    onKeyUp: function (event) {
-        switch (event.keyCode) {
-            case cc.macro.KEY.a:
-                this._indexDice=this._mapDice.Left();
-                cc.log(this._mapDice.diceFace);
-                this.changeAtlas(this._indexDice);
-                break;
-            case cc.macro.KEY.d:
-                this._indexDice=this._mapDice.Right();
-                cc.log(this._mapDice.diceFace);
-                this.changeAtlas(this._indexDice);
-                break;
-            case cc.macro.KEY.w:
-                this._indexDice=this._mapDice.Up();
-                cc.log(this._mapDice.diceFace);
-                this.changeAtlas(this._indexDice);
-                break;
-            case cc.macro.KEY.s:
-                this._indexDice=this._mapDice.Down();
-                cc.log(this._mapDice.diceFace);
-                this.changeAtlas(this._indexDice);
-                break;
-        }
-    },
     changeAtlas(index){
         this.node.getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrames()[index];
     },
 
+    Left(){
+        this._indexDice=this.dice.Left();
+        this.changeAtlas(this._indexDice);
+    },
+    Right(){
+        this._indexDice=this.dice.Right();
+        this.changeAtlas(this._indexDice);
+    },
+    Up(){
+        this._indexDice=this.dice.Up();
+        this.changeAtlas(this._indexDice);
+    },
+    Down(){
+        this._indexDice=this.dice.Down();
+        this.changeAtlas(this._indexDice);
+    },
+
+    getDiceFaces(){ 
+        return this.dice.setDiceFaces()
+    },
+
+    resetDiceFace(){
+        this.dice=new MapDice(  [0,3,0],
+            [5,1,2],
+            [0,4,0]);
+        this._indexDice=0,
+        this.changeAtlas(this._indexDice);
+    }
+    // getDiceFace(){
+    //     return this.dice.diceFace;
+    // }
     
+
 });

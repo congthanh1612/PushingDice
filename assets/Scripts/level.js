@@ -6,6 +6,7 @@ cc.Class({
     properties: {
         levelLock: cc.SpriteFrame,
         levelUnlock: cc.SpriteFrame,
+        
     },
 
     start() {

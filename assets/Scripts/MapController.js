@@ -4,7 +4,8 @@ cc.Class({
     properties: {
         atlas: [cc.SpriteAtlas],
         prefabs: [cc.Prefab],
-        tiles: [cc.Node]
+        tiles: [cc.Node],
+        spriteDestination:cc.SpriteFrame
     },
 
     // onLoad () {},
@@ -13,16 +14,16 @@ cc.Class({
 
     },
     renderMap(map) {
-        //this.destroyChildrenNode();
+        this.destroyChildrenNode();
         this.tiles = [];
-        for (let row = 0; row < map.y; row++) {
+        for (let row = 0; row < map.rows; row++) {
             this.tiles.push([])
-            for (let col = 0; col < map.x; col++) {
+            for (let col = 0; col < map.cols; col++) {
                 let newTile = cc.instantiate(this.prefabs[0]);
                 this.tiles[row].push(newTile);
                 newTile.parent = this.node;
-                newTile.x = 100 * col;
-                newTile.y = 100 * (map.x - row);
+                newTile.x = 80 * col;
+                newTile.y = 80 * (map.cols - row);
                 let id = [row,col];
                 if (checkArrayInArray2D(id,map.wallLeft)) {
                     newTile.getChildByName('left').active = true;
@@ -36,23 +37,26 @@ cc.Class({
                 if (checkArrayInArray2D(id,map.wallBottom)) {
                     newTile.getChildByName('bottom').active = true;
                 }
+                if(id[0]==map.destination[0]&&id[1]==map.destination[1]){ 
+                    newTile.getComponent(cc.Sprite).spriteFrame=this.spriteDestination;
+                    newTile.getChildByName('EndHoleText').active = true;
+                }
             }
         }
+        
+        return [map.start[0],map.start[1]];
     },
 
     destroyChildrenNode() {
         let oldElement = this.node.children;
         for (let index = 0; index < oldElement.length; ++index) {
-            oldElement[index].destroy();
+            if(oldElement[index].name=="Element")oldElement[index].destroy();
         }
-        this.node.removeAllChildren();
-
     },
 
     checkHaveSetWall(id, walls) {
         for (let i = 0; i < walls.length; i++) {
             const currentArray = walls[i];
-            cc.log(currentArray);
             if (currentArray.length === id.length) {
                 let isEqual = true;
                 for (let j = 0; j < currentArray.length; j++) {
