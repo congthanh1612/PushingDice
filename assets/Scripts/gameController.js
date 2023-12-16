@@ -5,30 +5,40 @@ const DICE_DIRECTION = {
     UP: 3,
     DOWN: 4
 };
+var newNode;
 cc.Class({
     extends: cc.Component,
 
     properties: {
+        levelScreen: cc.Node,
+        canvas: cc.Node,
         map: cc.Node,
         diceController: cc.Node,
         btnHolder: cc.Node,
         moves: cc.Label,
+        popupSettings: cc.Node,
+        popupGameOver: cc.Node,
+        popupWinGame: cc.Node,
 
         diceFace: {
             type: [cc.Label],
             default: [],
-        } 
+        },
+        _countMove: 0
     },
 
     onLoad() {
+        newNode = cc.instantiate(this.node.parent);
         this.log();
-        this.countMove = 16;
+        this.countMove = 1;
+        this._countMove = this.countMove;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.setupDice();
-        this.posStart = null;
+        // this.posStart = null;
         this.dice = this.diceController.getComponent("DiceController")
-        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
+        cc.log(this.dice._indexDice)
     },
 
     start() {
@@ -57,7 +67,6 @@ cc.Class({
     moveDice(event, direction) {
         if (this.isMovingDice) return;
         this.btnHolder.active = false;
-
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
 
@@ -101,16 +110,17 @@ cc.Class({
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.countMove--;
-                        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-                        if(row === 0 && col ===5 && this.dice.getDiceFace() ===6 ){
-                            alert('You Win')
+                        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
+                        if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() ===6 ){
+                            this.showWinGame();
                             this.diceController.active = false;
                         }
-                        else if(row === 0 && col ===5 && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
-                            alert('you lose')
+                        else if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
+                            this.showGameOver();
                             this.diceController .active = false;
                         };
                         this.isMovingDice = false;
+                        this.showBtnDirection();
                     })
                 ));
             }
@@ -119,9 +129,10 @@ cc.Class({
             }
         }
     },
+
     showBtnDirection() {
         this.btnHolder.active = true;
-        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows,this.newMap);
+        this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
         this.onDiceFaces();
     },
 
@@ -130,4 +141,35 @@ cc.Class({
             this.btnHolder.emit("UPDATE_DICE_NUMBER", str, index + 1);
         });
     },
+
+    undoDice() {
+
+    },
+    replayGame(event) { 
+        return this.gameStartState();
+    },
+
+    gameStartState(){
+        this.setupDice(); 
+        this.diceController.zIndex = 999
+        this.dice.resetDiceFace();
+        this.countMove = 16;
+        this._countMove = this.countMove;
+        // this.popupGameOver.active = false;
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
+        this.showBtnDirection();
+    },
+
+    showGameOver(){
+        this.popupGameOver.active = true;
+    },
+
+    showWinGame(){
+        this.popupWinGame.active = true;
+    },
+
+    onRestart(){
+        this.node.parent.destroy();
+        this.canvas.addChild(newNode);
+    }
 });

@@ -22,8 +22,8 @@ cc.Class({
                 let newTile = cc.instantiate(this.prefabs[0]);
                 this.tiles[row].push(newTile);
                 newTile.parent = this.node;
-                newTile.x = 100 * col;
-                newTile.y = 100 * (map.cols - row);
+                newTile.x = 80 * col;
+                newTile.y = 80 * (map.cols - row);
                 let id = [row,col];
                 if (checkArrayInArray2D(id,map.wallLeft)) {
                     newTile.getChildByName('left').active = true;
