@@ -12,6 +12,7 @@ cc.Class({
         musicButton:cc.Button,
         musicButtonOffSprite:cc.SpriteFrame,
         musicButtonOnSprite:cc.SpriteFrame,
+        soundClick:cc.AudioClip,
 
     },
     onLoad() {
@@ -46,6 +47,7 @@ cc.Class({
         Emitter.instance.emit('musicVolumeChangedFromScript2', { volume: newVolume, spriteFrame: spriteFrame });
     },
     onMusicButtonClick() {
+        Emitter.instance.emit("clickSound",this.soundClick);
         const currentValue = this.musicSlider.progress;
         const newValue = (currentValue === 0) ? 1 : 0;
         const spriteFrame = (newValue === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;

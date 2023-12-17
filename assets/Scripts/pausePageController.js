@@ -16,6 +16,7 @@ cc.Class({
         musicButtonOnSprite:cc.SpriteFrame,
         LevelScreen:cc.Node,
         gamePage:cc.Node,
+        soundClick:cc.AudioClip,
     },
     onLoad() {
         this.musicSliderPrefab.node.on('slide', this.onSendMusicSliderChange,this);
@@ -51,6 +52,7 @@ cc.Class({
     },
 
     onMusicPauseButtonClick() {
+        Emitter.instance.emit("clickSound",this.soundClick);
         const currentValue = this.musicSliderPrefab.progress;
         const newValue = (currentValue === 0) ? 1 : 0;
         const spriteFrame = (newValue === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;

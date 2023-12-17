@@ -177,7 +177,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 291.1583500805424
+      "z": 284.8058938486395
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -262,7 +262,7 @@
         "__id__": 43
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {
@@ -2071,6 +2071,9 @@
     },
     "warningLabel": {
       "__id__": 44
+    },
+    "soundClick": {
+      "__uuid__": "2b956f69-3667-469b-b76c-db4be7f9cbe2"
     },
     "_id": "29V7gwvO1DNZ8U91BElwp5"
   },
@@ -4725,6 +4728,9 @@
     },
     "musicButtonOnSprite": {
       "__uuid__": "dc038745-97da-452f-9141-0964d016733b"
+    },
+    "soundClick": {
+      "__uuid__": "2b956f69-3667-469b-b76c-db4be7f9cbe2"
     },
     "_id": "98/XfKLoxNfa4uL6WJq80U"
   },
@@ -7471,6 +7477,9 @@
     "gamePage": {
       "__id__": 215
     },
+    "soundClick": {
+      "__uuid__": "2b956f69-3667-469b-b76c-db4be7f9cbe2"
+    },
     "_id": "fcu1GHuZNAl7GBokF76DUL"
   },
   {
@@ -9603,7 +9612,7 @@
         "__id__": 326
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {

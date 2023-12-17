@@ -29,6 +29,7 @@ cc.Class({
 
         Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
 
+        Emitter.instance.registerEvent('clickSound',this.onSoundButton.bind(this));
     },
 
     onSelectedLevel(data) {
@@ -43,6 +44,10 @@ cc.Class({
                 this.gameScreen.children[i].active = true;
             }
         }
+    },
+    onSoundButton(clip){
+        cc.audioEngine.playEffect(clip,false);
+        cc.log('this sound')
     },
 
     onUnlockNextLevel() {

@@ -1,4 +1,4 @@
-
+const Emitter = require('mEmitter');
 cc.Class({
     extends: cc.Component,
 
@@ -9,6 +9,7 @@ cc.Class({
         settingPage:cc.Layout,
         levelScreen:cc.Node,
         warningLabel:cc.Label,
+        soundClick:cc.AudioClip,
 
     },
     onLoad () {
@@ -24,6 +25,7 @@ cc.Class({
     },
 
     onSubmit(){
+        Emitter.instance.emit("clickSound",this.soundClick);
         if(this.nameEditBox.string === ""){
             return this.warningLabel.node.active = true;
         }
@@ -35,6 +37,7 @@ cc.Class({
         
     },
     onShowSettingPage(){
+        Emitter.instance.emit("clickSound",this.soundClick);
         this.nameEditBox.enabled = false;
         this.node.opacity = 108;
         this.settingPage.node.active = true;
@@ -44,6 +47,7 @@ cc.Class({
         }
     },
     onHideSettingPage(){
+        Emitter.instance.emit("clickSound",this.soundClick);
         this.nameEditBox.enabled = true;
         this.settingPage.node.active = false;
         this.node.opacity = 255;
