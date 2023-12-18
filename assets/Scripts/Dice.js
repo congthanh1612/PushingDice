@@ -1,4 +1,4 @@
-class MapDice{
+class Dice{
     constructor(firstRow,secondRow,thirdRow){
         this.firstRow=firstRow,
         this.secondRow=secondRow,
@@ -39,4 +39,4 @@ class MapDice{
     }
 }
 
-module.exports=MapDice;
+module.exports=Dice;

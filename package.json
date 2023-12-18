@@ -1,0 +1,23 @@
+{
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  },
+  "name": "pushingdice",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/congthanh1612/PushingDice.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/congthanh1612/PushingDice/issues"
+  },
+  "homepage": "https://github.com/congthanh1612/PushingDice#readme",
+  "description": ""
+}

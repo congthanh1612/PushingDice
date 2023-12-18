@@ -1,4 +1,4 @@
-var MapDice = require('MapDice');
+var Dice = require('Dice'); 
 cc.Class({
     extends: cc.Component,
 
@@ -8,10 +8,10 @@ cc.Class({
     },
 
     onLoad() {
-        this.dice=new MapDice(  [0,3,0],
+        this.dice=new Dice(  [0,3,0],
                                 [5,1,2],
                                 [0,4,0]);
-        cc.log(this.dice)
+        //cc.log(this.dice)
     },
 
     changeAtlas(index){
@@ -40,15 +40,15 @@ cc.Class({
     },
 
     resetDiceFace(){
-        this.dice=new MapDice(  [0,3,0],
+        this.dice=new Dice(  [0,3,0],
             [5,1,2],
             [0,4,0]);
         this._indexDice=0,
         this.changeAtlas(this._indexDice);
+    },
+    getDiceFace(){
+        return this.dice.diceFace;
     }
-    // getDiceFace(){
-    //     return this.dice.diceFace;
-    // }
     
 
 });
