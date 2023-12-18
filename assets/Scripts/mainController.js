@@ -7,13 +7,6 @@ cc.Class({
         levelScreen: cc.Node,
         gameScreen: cc.Node,
 
-        musicSlider: cc.Slider,
-        musicSliderPrefab: cc.Slider,
-        musicAudio: cc.AudioSource,
-        musicLabelSetting: cc.Label,
-        musicLabelPause: cc.Label,
-        musicButtonSetting: cc.Button,
-        musicButtonPause: cc.Button,
     },
 
     onLoad() {
@@ -24,12 +17,6 @@ cc.Class({
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onUnlockNextLevel.bind(this));
-
-        Emitter.instance.registerEvent('musicVolumeChanged', this.onReceiveChangeMusic.bind(this));
-
-        Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
-
-        Emitter.instance.registerEvent('clickSound',this.onSoundButton.bind(this));
     },
 
     onSelectedLevel(data) {
@@ -45,27 +32,9 @@ cc.Class({
             }
         }
     },
-    onSoundButton(clip){
-        cc.audioEngine.playEffect(clip,false);
-        cc.log('this sound')
-    },
-
     onUnlockNextLevel() {
         this.gameScreen.active = false;
         this.levelScreen.active = true;
-    },
-    onChangeMusic(data) {
-        this.musicSliderPrefab.progress = data.volume;
-        this.musicAudio.volume = data.volume;
-        this.musicLabelPause.string = data.volume.toFixed(1) * 10;
-        this.musicButtonPause.getComponent(cc.Sprite).spriteFrame = data.spriteFrame;
-    },
-
-    onReceiveChangeMusic(data) {
-        this.musicSlider.progress = data.volume;
-        this.musicAudio.volume = data.volume;
-        this.musicLabelSetting.string = data.volume.toFixed(1) * 10;
-        this.musicButtonSetting.getComponent(cc.Sprite).spriteFrame = data.spriteFrame;
     },
     adjustSize() {
         let screenSize = cc.view.getVisibleSize();
