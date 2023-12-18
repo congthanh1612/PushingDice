@@ -57,7 +57,6 @@ cc.Class({
 
     createMapWithCsv(index){
         let data= this.loadMap[index].text;
-        cc.log(data)
         data=readFile(data);
         let map=new Map();
         map.setWall(data["wallLeft"], 'left');
