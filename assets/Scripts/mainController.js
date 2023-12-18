@@ -6,10 +6,13 @@ cc.Class({
     properties: {
         levelScreen: cc.Node,
         gameScreen: cc.Node,
+        content: cc.Node,
 
         musicSlider: cc.Slider,
         musicSliderPrefab: cc.Slider,
         musicAudio: cc.AudioSource,
+
+        scrollview: cc.ScrollView,
     },
 
     onLoad() {
@@ -17,32 +20,27 @@ cc.Class({
             this.adjustSize();
         });
         this.adjustSize();
+        this.hideScrollbar();
 
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
-        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onUnlockNextLevel.bind(this));
+        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.unlockNextLevel.bind(this));
 
         Emitter.instance.registerEvent('musicVolumeChanged', this.onReceiveChangeMusic.bind(this));
         Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
     },
 
     onSelectedLevel(data) {
+        console.log(data);
+        this.gameScreen.children[0].getComponent('gameController')._level = data;
         this.levelScreen.active = false;
-        // this.gameScreen.getComponent('gameController')._level = data;
         this.gameScreen.active = true;
-
-        let length = this.gameScreen.children.length;
-        for (let i = 0; i < length; i++) {
-            let name = this.gameScreen.children[i]._name;
-            if (name == data) {
-                this.gameScreen.children[i].active = true;
-            }
-        }
+        // this.gameScreen.getComponent('gameController').startGame();
     },
 
-    onUnlockNextLevel() {
-        this.gameScreen.active = false;
-        this.levelScreen.active = true;
+    unlockNextLevel(data) {
+        cc.sys.localStorage.setItem('unlock', data);
+        this.levelScreen.getComponent('levelController').loadLevel();
     },
 
     onChangeMusic(volume) {
@@ -73,4 +71,9 @@ cc.Class({
         this.node.width = newWidth;
         this.node.height = newHeight;
     },
+
+    hideScrollbar() {
+        this.scrollview.horizontalScrollBar = null;
+        this.scrollview.verticalScrollBar = null;
+    }
 });

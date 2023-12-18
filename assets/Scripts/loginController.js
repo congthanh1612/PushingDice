@@ -20,6 +20,7 @@ cc.Class({
             namePlayer:this.nameEditBox.string,
         }
         this.node.active = false;
+        this.levelScreen.getComponent('levelController').loadLevel();
         this.levelScreen.active = true;
     },
     onShowSettingPage(){

@@ -15,11 +15,8 @@ cc.Class({
         let isLock = this.node.children[0].active;
         if (isLock) {
             this.playEffect();
-            let level = this.node.name;
-            Emitter.instance.emit('SELECTED_LEVEL', level);
-            // window.globalData = {
-            //     selectedLevel: this.node.name,
-            // };
+            let levelNumber = this.node.children[0].getComponent(cc.Label).string
+            Emitter.instance.emit('SELECTED_LEVEL', levelNumber);
         }
     }, 
 

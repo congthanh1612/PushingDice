@@ -6,6 +6,8 @@ const DICE_DIRECTION = {
     DOWN: 4
 };
 var newNode;
+const Emitter = require('mEmitter');
+
 cc.Class({
     extends: cc.Component,
 
@@ -24,13 +26,14 @@ cc.Class({
             type: [cc.Label],
             default: [],
         },
-        _countMove: 0
+        _countMove: 0,
+        _level: ''
     },
 
     onLoad() {
         newNode = cc.instantiate(this.node.parent);
         this.log();
-        this.countMove = 1;
+        this.countMove = 16;
         this._countMove = this.countMove;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
@@ -48,9 +51,9 @@ cc.Class({
     log() {
         this.newMap = new Map();
         this.newMap.setWall([[0, 5]], 'left');
-        this.newMap.setWall([[3,0],[3,1]],'right')
-        this.newMap.setWall([[3,0],[3,1]],'top')
-        this.newMap.setWall([[4,0],[4,1]],'bottom')
+        this.newMap.setWall([[3, 0], [3, 1]], 'right')
+        this.newMap.setWall([[3, 0], [3, 1]], 'top')
+        this.newMap.setWall([[4, 0], [4, 1]], 'bottom')
         this.newMap.setStart(3, 0);
         this.newMap.setDestination(0, 5);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
@@ -60,7 +63,7 @@ cc.Class({
         this.diceController.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
         this.currentDicePos = {
             row: this.posStart[0],
-            col: this.posStart[1]  
+            col: this.posStart[1]
         };
     },
 
@@ -101,7 +104,7 @@ cc.Class({
             row,
             col
         };
-        
+
         this.isMovingDice = true;
         if (-1 < row < this.newMap.rows && -1 < col < this.newMap.cols) {
             const targetPosition = this.tilesMap[row][col].position;
@@ -111,13 +114,14 @@ cc.Class({
                     cc.callFunc(() => {
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
-                        if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() ===6 ){
+                        if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() === 6) {
+                            // this.unlockNextLevel();
                             this.showWinGame();
                             this.diceController.active = false;
                         }
-                        else if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
+                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() != 6 || this.countMove === 0) {
                             this.showGameOver();
-                            this.diceController .active = false;
+                            this.diceController.active = false;
                         };
                         this.isMovingDice = false;
                         this.showBtnDirection();
@@ -145,12 +149,12 @@ cc.Class({
     undoDice() {
 
     },
-    replayGame(event) { 
+    replayGame(event) {
         return this.gameStartState();
     },
 
-    gameStartState(){
-        this.setupDice(); 
+    gameStartState() {
+        this.setupDice();
         this.diceController.zIndex = 999
         this.dice.resetDiceFace();
         this.countMove = 16;
@@ -160,16 +164,26 @@ cc.Class({
         this.showBtnDirection();
     },
 
-    showGameOver(){
+    showSettings(){
+        this.popupSettings.active = true;
+    },
+
+    showGameOver() {
         this.popupGameOver.active = true;
     },
 
-    showWinGame(){
+    showWinGame() {
         this.popupWinGame.active = true;
     },
 
-    onRestart(){
+    onRestart() {
         this.node.parent.destroy();
         this.canvas.addChild(newNode);
-    }
+    },
+
+    onBackLevel() {
+        this.node.parent.active = false;
+        this.levelScreen.active = true;
+        Emitter.instance.emit('COMPLETE_LEVEL', 5);
+    },
 });

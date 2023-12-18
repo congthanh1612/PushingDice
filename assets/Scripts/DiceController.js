@@ -45,10 +45,10 @@ cc.Class({
             [0,4,0]);
         this._indexDice=0,
         this.changeAtlas(this._indexDice);
+    },
+    getDiceFace(){
+        return this.dice.diceFace;
     }
-    // getDiceFace(){
-    //     return this.dice.diceFace;
-    // }
     
 
 });

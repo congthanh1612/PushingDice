@@ -1,43 +1,38 @@
-var levelsUnlock = ['Level 1'];
-
 cc.Class({
     extends: cc.Component,
 
     properties: {
-        gameScreen: cc.Node,
+        loginScreen: cc.Node,
         levelUnlock: cc.SpriteFrame,
-
+        content: cc.Node,
+        prefabLevel: cc.Prefab,
+        _countLevel: 50
     },
-
+    onLoad() {
+        this._countLevel = 50;
+    },
     onBack() {
         this.node.active = false;
-        this.gameScreen.active = true;
+        this.loginScreen.active = true;
     },
 
-    onLoad() {
-        this.loadLevels();
-        this.unlockLevel();
-    },
+    loadLevel() {
+        this.content.removeAllChildren();
+        cc.sys.localStorage.removeItem('unlock');
+        var retrievedValue = cc.sys.localStorage.getItem('unlock');
+        if (retrievedValue == null) retrievedValue = 1;
 
-    loadLevels() {
-        let length = this.node.children[1].children.length;
-        for (let i = 0; i < levelsUnlock.length; i++) {
-            for (let j = 0; j < length; j++) {
-                let name = this.node.children[1].children[j].name;
-                let levelNode = this.node.children[1].children[j];
-                if (name == levelsUnlock[i]) {
-                    levelNode.children[0].active = true;
-                    levelNode.getComponent(cc.Sprite)._spriteFrame = this.levelUnlock;
+        for (let i = 0; i < this._countLevel; i++) {
+            let newLevel = cc.instantiate(this.prefabLevel);
+            for (let j = 0; j < retrievedValue; j++) {
+                if (i == j) {
+                    newLevel.getComponent(cc.Sprite)._spriteFrame = this.levelUnlock;
+                    newLevel.children[0].active = true;
+                    newLevel.children[0].getComponent(cc.Label).string = i + 1;
+                    continue;
                 }
             }
+            this.content.addChild(newLevel);
         }
-    },
-
-    unlockLevel() {
-        const unlockLevel = window.globalData.unlockLevel;
-        if (levelsUnlock.indexOf(unlockLevel) === -1) {
-            levelsUnlock.push(unlockLevel);
-        }
-        this.loadLevels();
     },
 });
