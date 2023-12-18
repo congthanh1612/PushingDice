@@ -17,11 +17,11 @@ cc.Class({
         diceFace: {
             type: [cc.Label],
             default: [],
-        } 
+        }
     },
 
     onLoad() {
-        this.log();
+        this.createMap();
         this.countMove = 16;
         this.diceController.zIndex = 999
         this.tilesMap = this.map.getComponent("MapController").tiles;
@@ -36,14 +36,8 @@ cc.Class({
 
     },
 
-    log() {
-        this.newMap = new Map();
-        this.newMap.setWall([[0, 5]], 'left');
-        this.newMap.setWall([[3,0],[3,1]],'right')
-        this.newMap.setWall([[3,0],[3,1]],'top')
-        this.newMap.setWall([[4,0],[4,1]],'bottom')
-        this.newMap.setStart(3, 0);
-        this.newMap.setDestination(0, 5);
+    createMap() {
+        this.newMap = this.map.getComponent('MapController').createMapWithCsv(0);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
     },
 
@@ -51,7 +45,7 @@ cc.Class({
         this.diceController.position = this.tilesMap[this.posStart[0]][this.posStart[1]].position;
         this.currentDicePos = {
             row: this.posStart[0],
-            col: this.posStart[1]  
+            col: this.posStart[1]
         };
     },
 
@@ -92,7 +86,7 @@ cc.Class({
             row,
             col
         };
-        
+
         this.isMovingDice = true;
         if (-1 < row < this.newMap.rows && -1 < col < this.newMap.cols) {
             const targetPosition = this.tilesMap[row][col].position;
@@ -102,13 +96,13 @@ cc.Class({
                     cc.callFunc(() => {
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-                        if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() ===6 ){
+                        if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() === 6) {
                             alert('You Win')
                             this.diceController.active = false;
                         }
-                        else if(row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() !=6 || this.countMove ===0 ){
+                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.dice.getDiceFace() != 6 || this.countMove === 0) {
                             alert('you lose')
-                            this.diceController .active = false;
+                            this.diceController.active = false;
                         };
                         this.isMovingDice = false;
                         this.showBtnDirection();
@@ -136,16 +130,16 @@ cc.Class({
     undoDice() {
 
     },
-    replayGame(event) { 
+    replayGame(event) {
         return this.gameStartState();
     },
 
-    gameStartState(){
-        this.setupDice(); 
+    gameStartState() {
+        this.setupDice();
         this.diceController.zIndex = 999
         this.dice.resetDiceFace();
         this.countMove = 16;
-        this.moves.getComponent(cc.Label).string = 'Moves: '+ this.countMove;
+        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
         this.showBtnDirection();
     },
 });

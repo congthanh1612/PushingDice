@@ -1,4 +1,4 @@
-import { checkArrayInArray2D } from './CheckValue.js';
+import { checkArrayInArray2D } from './otherProcessing.js';
 const DICE_DIRECTION = {
     LEFT: 1,
     RIGHT: 2,

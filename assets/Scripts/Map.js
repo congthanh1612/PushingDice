@@ -1,4 +1,3 @@
-import { checkArrayInArray2D } from './CheckValue.js';
 class Map {
     constructor(cols=6, rows=8) {
         this.rows = rows;

@@ -159,7 +159,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 364.4492295384447
+      "z": 232.08725304469138
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -2041,6 +2041,11 @@
     "spriteDestination": {
       "__uuid__": "cf5b94e5-a930-4de9-8693-7ce96e355e82"
     },
+    "loadMap": [
+      {
+        "__uuid__": "4a2b6a84-0716-443c-8f81-a55e1b3ff9c3"
+      }
+    ],
     "_id": "237O08f0hL4JCvQnCttWBY"
   },
   {
