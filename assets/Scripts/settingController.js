@@ -43,10 +43,11 @@ cc.Class({
         const spriteFrame = (newVolume === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
-        Emitter.instance.emit('musicVolumeChangedFromScript2', { volume: newVolume, spriteFrame: spriteFrame });
+        //Emitter.instance.emit('musicVolumeChangedFromScript2', { volume: newVolume, spriteFrame: spriteFrame });
     },
     onMusicButtonClick() {
         Emitter.instance.emit("clickSound");
+        Emitter.instance.emit("playMusic")
         const currentValue = this.musicSlider.progress;
         const newValue = (currentValue === 0) ? 1 : 0;
         const spriteFrame = (newValue === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
@@ -62,16 +63,14 @@ cc.Class({
         this.musicLabel.string = newValue.toFixed(1) * 10;
         cc.sys.localStorage.setItem('volumeMusic',newValue.toFixed(1) * 10)
 
-        Emitter.instance.emit('musicVolumeChangedFromScript2',{ volume: newValue, spriteFrame: spriteFrame });
+        //Emitter.instance.emit('musicVolumeChangedFromScript2',{ volume: newValue, spriteFrame: spriteFrame });
     },
 
     loadDataMusic(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeMusic');
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrameMusic')
         if(volumeLocal==null)volumeLocal=1;
-        if (volumeLocal !== 0) {
-            this.musicAudio.volume = volumeLocal;
-        }
+       
         if(spriteFrameName==null)spriteFrameName=this.musicButtonOffSprite;
         this.musicLabel.string=volumeLocal;
         if (spriteFrameName === this.musicButtonOnSprite.name) {

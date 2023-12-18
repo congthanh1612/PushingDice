@@ -93,7 +93,7 @@ cc.Class({
         const spriteFrame = (newVolume === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
-        Emitter.instance.emit('musicVolumeChanged', { volume: newVolume, spriteFrame: spriteFrame });
+        //Emitter.instance.emit('musicVolumeChanged', { volume: newVolume, spriteFrame: spriteFrame });
     },
 
     onMusicPauseButtonClick() {
@@ -113,7 +113,7 @@ cc.Class({
         this.musicLabel.string = newValue.toFixed(1) * 10;
         cc.sys.localStorage.setItem('volumeMusic',newValue.toFixed(1) * 10)
 
-        Emitter.instance.emit('musicVolumeChanged', { volume: newValue, spriteFrame: spriteFrame });
+      //  Emitter.instance.emit('musicVolumeChanged', { volume: newValue, spriteFrame: spriteFrame });
     },
     loadDataMusic(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeMusic');

@@ -180,7 +180,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 376.7210506462308
+      "z": 284.9960566550614
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -311,7 +311,7 @@
       "__id__": 174
     },
     "musicAudio": {
-      "__id__": 215
+      "__uuid__": "e84f8a0c-9adf-483d-8848-59e1cd2f7bb7"
     },
     "musicLabelSetting": {
       "__id__": 323
@@ -2340,7 +2340,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 491.52,
+      "width": 492,
       "height": 90.2
     },
     "_anchorPoint": {
