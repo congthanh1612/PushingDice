@@ -11,6 +11,8 @@ cc.Class({
         musicButton: cc.Button,
         musicButtonOffSprite: cc.SpriteFrame,
         musicButtonOnSprite: cc.SpriteFrame,
+        gameScreen:cc.Node,
+        levelScreen:cc.Node,
 
 
     },

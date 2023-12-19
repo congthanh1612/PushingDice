@@ -7,15 +7,9 @@ cc.Class({
         soundClick:{
             type: cc.AudioClip,
             default:null },
-        musicSlider: cc.Slider,
-        musicSliderPrefab: cc.Slider,
         musicAudio:{
             type: cc.AudioClip,
             default:null },
-        musicLabelSetting: cc.Label,
-        musicLabelPause: cc.Label,
-        musicButtonSetting: cc.Button,
-        musicButtonPause: cc.Button,
         
     },
 

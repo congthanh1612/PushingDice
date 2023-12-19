@@ -78,6 +78,7 @@ cc.Class({
         Emitter.instance.emit("playMusic");
         Emitter.instance.emit("clickSound");
         this.node.active = false;
+        this.levelScreen.getComponent('levelController').loadLevel();
         this.levelScreen.active = true;
         
     },
