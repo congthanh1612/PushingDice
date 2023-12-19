@@ -326,7 +326,7 @@
         "__id__": 44
       }
     ],
-    "_active": false,
+    "_active": true,
     "_level": 1,
     "_components": [
       {
@@ -1622,7 +1622,7 @@
       "__id__": 7
     },
     "_children": [],
-    "_active": true,
+    "_active": false,
     "_level": 2,
     "_components": [
       {
@@ -4814,7 +4814,7 @@
         "__id__": 256
       }
     ],
-    "_active": true,
+    "_active": false,
     "_level": 1,
     "_components": [
       {
@@ -6555,8 +6555,10 @@
     "_fontSize": 8,
     "_lineHeight": 40,
     "_enableWrapText": true,
-    "_N$file": null,
-    "_isSystemFontUsed": true,
+    "_N$file": {
+      "__uuid__": "f42635dc-f743-44e6-b466-929c93fe1d92"
+    },
+    "_isSystemFontUsed": false,
     "_spacingX": 0,
     "_batchAsBitmap": false,
     "_N$horizontalAlign": 1,
@@ -6592,8 +6594,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 20.02,
-      "height": 50.4
+      "width": 118.75,
+      "height": 10
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
@@ -6739,6 +6741,7 @@
     "spriteDestination": {
       "__uuid__": "cf5b94e5-a930-4de9-8693-7ce96e355e82"
     },
+    "map": null,
     "_id": "57vq3msSFCf7D6TYqo2Nze"
   },
   {
@@ -6749,7 +6752,7 @@
       "__id__": 114
     },
     "_children": [],
-    "_active": false,
+    "_active": true,
     "_level": 2,
     "_components": [
       {

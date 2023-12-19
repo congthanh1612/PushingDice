@@ -1,5 +1,7 @@
-var Dice = require('Dice'); 
+var Dice = require('Dice');
 var Map = require('Map');
+const Emitter = require('mEmitter');
+
 const DICE_DIRECTION = {
     LEFT: 1,
     RIGHT: 2,
@@ -11,32 +13,34 @@ cc.Class({
 
     properties: {
         atlas: cc.SpriteAtlas,
-        _indexDice:1,
+        _indexDice: 1,
         map: cc.Node,
         btnHolder: cc.Node,
         moves: cc.Label,
         diceFace: {
-            type: [cc.Label],  
+            type: [cc.Label],
             default: [],
-        }
+        },
     },
 
-    createDice(data){
-        this.dice=new Dice( data['firstRow'],   
-                            data['secondRow'],
-                            data['thirdRow']);
-        this.changeAtlas(this.dice.diceFace-1)
+    createDice(data) {
+        this.dice = new Dice(data['firstRow'],
+            data['secondRow'],
+            data['thirdRow']);
+        this.changeAtlas(this.dice.diceFace - 1)
         this.countMove = data['moves'][0];
-        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
+        this._totalMove = data['moves'][0];
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
         this.posStart = data['start'];
-        this.newMap=this.map.getComponent('MapController').map;
-        this.destination = {                               
+        this.newMap = this.map.getComponent('MapController').map;
+        this.destination = {
             row: data['destination'][0],
             col: data['destination'][1]
         };
+        this.currentLevel = data['level'];
     },
 
-    setupDice(pos) { 
+    setupDice(pos) {
         this.diceResult = 6;
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.node.position = this.tilesMap[pos[0]][pos[1]].position;
@@ -92,15 +96,16 @@ cc.Class({
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.countMove--;
-                        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+                        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
-                            alert('You Win')
+                            // alert('You Win')
+                            Emitter.instance.emit('COMPLETE_LEVEL', this.currentLevel);
                             this.node.active = false;
                         }
-                        else if (row ===  this.destination.row && col ===  this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
+                        else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
                             alert('you lose')
                             this.node.active = false;
-                            
+
                         };
                         this.isMovingDice = false;
                         this.showBtnDirection();
@@ -125,39 +130,39 @@ cc.Class({
         });
     },
 
-    changeAtlas(index){
-        this.node.getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrames()[index];
+    changeAtlas(index) {
+        this.node.getComponent(cc.Sprite).spriteFrame = this.atlas.getSpriteFrames()[index];
     },
 
-    Left(){
-        this._indexDice=this.dice.Left();
+    Left() {
+        this._indexDice = this.dice.Left();
         this.changeAtlas(this._indexDice);
     },
-    Right(){
-        this._indexDice=this.dice.Right();
+    Right() {
+        this._indexDice = this.dice.Right();
         this.changeAtlas(this._indexDice);
     },
-    Up(){
-        this._indexDice=this.dice.Up();
+    Up() {
+        this._indexDice = this.dice.Up();
         this.changeAtlas(this._indexDice);
     },
-    Down(){
-        this._indexDice=this.dice.Down();
+    Down() {
+        this._indexDice = this.dice.Down();
         this.changeAtlas(this._indexDice);
     },
 
-    getDiceFaces(){ 
+    getDiceFaces() {
         return this.dice.setDiceFaces()
     },
 
-    resetDiceFace(){
-        this.dice=new Dice(  [0,3,0],
-            [5,1,2],
-            [0,4,0]);
-        this._indexDice=0,
-        this.changeAtlas(this._indexDice);
+    resetDiceFace() {
+        this.dice = new Dice([0, 3, 0],
+            [5, 1, 2],
+            [0, 4, 0]);
+        this._indexDice = 0,
+            this.changeAtlas(this._indexDice);
     },
-    getDiceFace(){
+    getDiceFace() {
         return this.dice.diceFace;
     }
 
