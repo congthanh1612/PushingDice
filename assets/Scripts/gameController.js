@@ -1,31 +1,31 @@
 var Map = require('Map');
-
+const Emitter = require('mEmitter');
+import {readFile } from "./otherProcessing.js";
 cc.Class({
     extends: cc.Component,
 
     properties: {
         map: cc.Node,
         diceController: cc.Node,
-        
+        levels:[cc.TextAsset],
+        _level: 0
     },
-
     onLoad() {
-        this.startGame(0);
-       
+        this.startGame(8);
     },
 
     startGame(level){
-        
-        this.createMap(level);
+        this.dataLevel=this.levels[level].text;
+        this.dataLevel=readFile(this.dataLevel);
+        this.createMap(this.dataLevel);
     },
-    createMap(index) {
+    createMap(dataLevel) {
         this.dice = this.diceController.getComponent("DiceController")
-        this.newMap = this.map.getComponent('MapController').createMapWithCsv(index);
-        this.map.getComponent('MapController').renderMap(this.newMap)
+        this.newMap = this.map.getComponent('MapController').createMapWithCsv(dataLevel);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
-        this.diceController.zIndex = 999
+        this.diceController.zIndex = 999;
+        this.dice.createDice(dataLevel);
         this.dice.setupDice(this.posStart)
-        cc.log(this.posStart)
     },
 
     

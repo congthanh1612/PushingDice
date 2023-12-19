@@ -1,3 +1,4 @@
+
 var Dice = require('Dice'); 
 var Map = require('Map');
 const DICE_DIRECTION = {
@@ -15,7 +16,6 @@ cc.Class({
         map: cc.Node,
         btnHolder: cc.Node,
         moves: cc.Label,
-
         diceFace: {
             type: [cc.Label],  
             default: [],
@@ -23,15 +23,24 @@ cc.Class({
     },
 
     onLoad() {
-        this.dice=new Dice(  [0,3,0],   
-                                [5,1,2],
-                                [0,4,0]);
-        this.countMove = 16;
-        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
-        this.newMap = this.map.getComponent('MapController').createMapWithCsv(0);
-        this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);  
+        // this.dice=new Dice(  [0,3,0],   
+        //                         [5,1,2],
+        //                         [0,4,0]);
+        // this.countMove = 16;
+        // this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
+        // this.newMap = this.map.getComponent('MapController').createMapWithCsv(0);
+        // this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);  
     },
-
+    createDice(data){
+        this.dice=new Dice( data['firstRow'],   
+                            data['secondRow'],
+                            data['thirdRow']);
+        this.changeAtlas(this.dice.diceFace-1)
+        this.countMove = data['moves'][0];
+        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
+        this.posStart = data['start'];
+        this.newMap=this.map.getComponent('MapController').map;
+    },
     setupDice(pos) {
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.node.position = this.tilesMap[pos[0]][pos[1]].position;
@@ -39,7 +48,6 @@ cc.Class({
             row: pos[0],
             col: pos[1]
         };
-        cc.log('cr', this.node.position)
     },
 
     moveDice(event, direction) {
@@ -157,8 +165,4 @@ cc.Class({
     getDiceFace(){
         return this.dice.diceFace;
     }
-
-    
-    
-
 });
