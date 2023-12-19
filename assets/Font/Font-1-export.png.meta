@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "e221f200-6932-4df8-b157-03aed33c75aa",
+  "uuid": "9781295f-1f36-4f1c-b3b2-a9d69680cd13",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "Font-1-export": {
       "ver": "1.0.4",
-      "uuid": "332ddc88-a363-442f-b68b-eb0145e7f16c",
-      "rawTextureUuid": "e221f200-6932-4df8-b157-03aed33c75aa",
+      "uuid": "41814adf-90b3-4101-985c-57272f3a932b",
+      "rawTextureUuid": "9781295f-1f36-4f1c-b3b2-a9d69680cd13",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,

@@ -1,0 +1,52 @@
+{
+  "ver": "2.3.3",
+<<<<<<<< HEAD:assets/Images/button/button_Menu.png.meta
+  "uuid": "ff6eaea6-5814-4182-aa26-2ec10612bd5f",
+========
+  "uuid": "5df02208-2133-4a70-9064-f5342b6e6328",
+>>>>>>>> main:assets/Images/setting/Music_on.png.meta
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+<<<<<<<< HEAD:assets/Images/button/button_Menu.png.meta
+    "button_Menu": {
+      "ver": "1.0.4",
+      "uuid": "48477b23-0898-4f16-9532-348467dfd49f",
+      "rawTextureUuid": "ff6eaea6-5814-4182-aa26-2ec10612bd5f",
+========
+    "Music_on": {
+      "ver": "1.0.4",
+      "uuid": "dc038745-97da-452f-9141-0964d016733b",
+      "rawTextureUuid": "5df02208-2133-4a70-9064-f5342b6e6328",
+>>>>>>>> main:assets/Images/setting/Music_on.png.meta
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+<<<<<<<< HEAD:assets/Images/button/button_Menu.png.meta
+      "width": 196,
+      "height": 68,
+      "rawWidth": 196,
+      "rawHeight": 68,
+========
+      "width": 500,
+      "height": 500,
+      "rawWidth": 500,
+      "rawHeight": 500,
+>>>>>>>> main:assets/Images/setting/Music_on.png.meta
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

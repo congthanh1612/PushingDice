@@ -1,4 +1,5 @@
 const Emitter = require('mEmitter');
+const audioEngine = cc.audioEngine;
 
 cc.Class({
     extends: cc.Component,

@@ -1,0 +1,52 @@
+{
+  "ver": "2.3.3",
+<<<<<<<< HEAD:assets/Font/Settings_name.png.meta
+  "uuid": "a9622ae6-d7bf-4f4f-8bb7-3d24b5cb624f",
+========
+  "uuid": "cc7c96a8-0ca5-4fc7-8e30-735e53484fd2",
+>>>>>>>> main:assets/Images/setting/Slidebar.png.meta
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "premultiplyAlpha": false,
+  "genMipmaps": false,
+  "packable": true,
+  "platformSettings": {},
+  "subMetas": {
+<<<<<<<< HEAD:assets/Font/Settings_name.png.meta
+    "Settings_name": {
+      "ver": "1.0.4",
+      "uuid": "7fb24842-c7f6-4849-83c4-d766af521c57",
+      "rawTextureUuid": "a9622ae6-d7bf-4f4f-8bb7-3d24b5cb624f",
+========
+    "Slidebar": {
+      "ver": "1.0.4",
+      "uuid": "31f13177-45a1-4c7e-a7f2-a5fda563ab8d",
+      "rawTextureUuid": "cc7c96a8-0ca5-4fc7-8e30-735e53484fd2",
+>>>>>>>> main:assets/Images/setting/Slidebar.png.meta
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+<<<<<<<< HEAD:assets/Font/Settings_name.png.meta
+      "width": 162,
+      "height": 41,
+      "rawWidth": 162,
+      "rawHeight": 41,
+========
+      "width": 294,
+      "height": 14,
+      "rawWidth": 294,
+      "rawHeight": 14,
+>>>>>>>> main:assets/Images/setting/Slidebar.png.meta
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}

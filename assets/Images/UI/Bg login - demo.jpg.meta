@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "4eb4d432-a5c8-4911-889c-604c3b9f5513",
+  "uuid": "e75fab23-581b-4626-bd47-b61ff0d1c90c",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -11,8 +11,8 @@
   "subMetas": {
     "Bg login - demo": {
       "ver": "1.0.4",
-      "uuid": "1ee5bd2b-797a-4795-a5dc-f0fe27696332",
-      "rawTextureUuid": "4eb4d432-a5c8-4911-889c-604c3b9f5513",
+      "uuid": "c75d6059-ee1f-4f82-adaf-096a9d21cd4d",
+      "rawTextureUuid": "e75fab23-581b-4626-bd47-b61ff0d1c90c",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
