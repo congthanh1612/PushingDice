@@ -7,7 +7,7 @@ cc.Class({
         playButton:cc.Button,
         settingButton:cc.Button,
         settingPage:cc.Layout,
-
+        levelScreen: cc.Node
     },
     onLoad () {},
 
@@ -19,7 +19,9 @@ cc.Class({
         this.player ={
             namePlayer:this.nameEditBox.string,
         }
-        cc.log(this.player)
+        this.node.active = false;
+        this.levelScreen.getComponent('levelController').loadLevel();
+        this.levelScreen.active = true;
     },
     onShowSettingPage(){
         this.nameEditBox.enabled = false;

@@ -1,4 +1,3 @@
-
 var Dice = require('Dice'); 
 var Map = require('Map');
 const DICE_DIRECTION = {
@@ -98,7 +97,7 @@ cc.Class({
                             alert('You Win')
                             this.node.active = false;
                         }
-                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() != this.diceResult || this.countMove === 0) {
+                        else if (row ===  this.destination.row && col ===  this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
                             alert('you lose')
                             this.node.active = false;
                             
@@ -113,7 +112,6 @@ cc.Class({
             }
         }
     },
-
     showBtnDirection() {
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
