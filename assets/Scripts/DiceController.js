@@ -1,4 +1,3 @@
-
 var Dice = require('Dice'); 
 var Map = require('Map');
 const DICE_DIRECTION = {
@@ -98,7 +97,7 @@ cc.Class({
                             alert('You Win')
                             this.node.active = false;
                         }
-                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() != this.diceResult || this.countMove === 0) {
+                        else if (row ===  this.destination.row && col ===  this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
                             alert('you lose')
                             this.node.active = false;
                             
@@ -113,7 +112,6 @@ cc.Class({
             }
         }
     },
-
     showBtnDirection() {
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
@@ -131,27 +129,24 @@ cc.Class({
         this.node.getComponent(cc.Sprite).spriteFrame=this.atlas.getSpriteFrames()[index];
     },
 
-    Left() {
-        this._indexDice = this.dice.Left();
-        this.pushFaceDice(this.dice.diceFace);
-        this.runAnim(this._indexDice);
+    Left(){
+        this._indexDice=this.dice.Left();
+        this.changeAtlas(this._indexDice);
     },
-    Right() {
-        this._indexDice = this.dice.Right();
-        this.pushFaceDice(this.dice.diceFace);
-        this.runAnim(this._indexDice);
+    Right(){
+        this._indexDice=this.dice.Right();
+        this.changeAtlas(this._indexDice);
     },
-    Up() {
-        this._indexDice = this.dice.Up();
-        this.pushFaceDice(this.dice.diceFace);
-        this.runAnim(this._indexDice);
+    Up(){
+        this._indexDice=this.dice.Up();
+        this.changeAtlas(this._indexDice);
     },
     Down(){
         this._indexDice=this.dice.Down();
         this.changeAtlas(this._indexDice);
     },
 
-    getDiceFaces() {
+    getDiceFaces(){ 
         return this.dice.setDiceFaces()
     },
 

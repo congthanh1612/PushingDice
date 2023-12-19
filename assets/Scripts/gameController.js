@@ -5,23 +5,24 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        levelScreen: cc.Node,
-        canvas: cc.Node,
         map: cc.Node,
         diceController: cc.Node,
         levels:[cc.TextAsset],
         _level: 0
     },
     onLoad() {
-        this.startGame(8);
+        
+        this.startGame(9);
     },
 
     startGame(level){
+        
         this.dataLevel=this.levels[level].text;
         this.dataLevel=readFile(this.dataLevel);
         this.createMap(this.dataLevel);
     },
     createMap(dataLevel) {
+        
         this.dice = this.diceController.getComponent("DiceController")
         this.newMap = this.map.getComponent('MapController').createMapWithCsv(dataLevel);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
@@ -32,57 +33,16 @@ cc.Class({
 
     
 
-    replayGame(event) {
-        return this.gameStartState();
-    },
+    // replayGame(event) {
+    //     return this.startGame();
+    // },
 
-    gameStartState() {
-        this.setupDice();
-        this.diceController.zIndex = 999
-        this.dice.resetDiceFace();
-        this.countMove = 16;
-        this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-        this.showBtnDirection();
-    },
-
-    undoDice() {
-
-    },
-    replayGame(event) {
-        return this.gameStartState();
-    },
-
-    gameStartState() {
-        this.setupDice();
-        this.diceController.zIndex = 999
-        this.dice.resetDiceFace();
-        this.countMove = 16;
-        this._countMove = this.countMove;
-        // this.popupGameOver.active = false;
-        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._countMove}`;
-        this.showBtnDirection();
-    },
-
-    showSettings(){
-        this.popupSettings.active = true;
-    },
-
-    showGameOver() {
-        this.popupGameOver.active = true;
-    },
-
-    showWinGame() {
-        this.popupWinGame.active = true;
-    },
-
-    onRestart() {
-        this.node.parent.destroy();
-        this.canvas.addChild(newNode);
-    },
-
-    onBackLevel() {
-        this.node.parent.active = false;
-        this.levelScreen.active = true;
-        Emitter.instance.emit('COMPLETE_LEVEL', 5);
-    },
+    // gameStartState() {
+    //     this.setupDice();
+    //     this.diceController.zIndex = 999
+    //     this.dice.resetDiceFace();
+    //     this.countMove = 16;
+    //     this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
+    //     this.showBtnDirection();
+    // },
 });
