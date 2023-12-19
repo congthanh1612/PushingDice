@@ -32,14 +32,20 @@ cc.Class({
 
     onSelectedLevel(data) {
         console.log(data);
-        this.gameScreen.children[0].getComponent('gameController')._level = data;
+        this.gameScreen.children[0].getComponent('gameController').startGame(data);
         this.levelScreen.active = false;
         this.gameScreen.active = true;
         // this.gameScreen.getComponent('gameController').startGame();
     },
 
     unlockNextLevel(data) {
-        cc.sys.localStorage.setItem('unlock', data);
+        var value = cc.sys.localStorage.getItem('unlock');
+        value = parseInt(value);
+        if (data < value) {
+            cc.sys.localStorage.setItem('unlock', value);
+        } else {
+            cc.sys.localStorage.setItem('unlock', data + 1);
+        }
         this.levelScreen.getComponent('levelController').loadLevel();
     },
 

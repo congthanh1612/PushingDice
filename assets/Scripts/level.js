@@ -10,6 +10,7 @@ cc.Class({
         if (isLock) {
             let levelNumber = this.node.children[0].getComponent(cc.Label).string;
             levelNumber = parseInt(levelNumber) - 1;
+            console.log(levelNumber);
             Emitter.instance.emit('SELECTED_LEVEL', levelNumber);
         }
     }, 

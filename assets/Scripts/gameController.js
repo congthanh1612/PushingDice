@@ -11,18 +11,17 @@ cc.Class({
         _level: 0
     },
     onLoad() {
-        
-        this.startGame(9);
+        // this.startGame(9);
     },
 
     startGame(level){
-        
         this.dataLevel=this.levels[level].text;
         this.dataLevel=readFile(this.dataLevel);
+        this.dataLevel["level"]=level+1;
         this.createMap(this.dataLevel);
     },
+
     createMap(dataLevel) {
-        
         this.dice = this.diceController.getComponent("DiceController")
         this.newMap = this.map.getComponent('MapController').createMapWithCsv(dataLevel);
         this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);
