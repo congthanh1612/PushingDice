@@ -6,7 +6,13 @@ cc.Class({
     properties: {
         levelScreen: cc.Node,
         gameScreen: cc.Node,
+        content: cc.Node,
 
+        musicSlider: cc.Slider,
+        musicSliderPrefab: cc.Slider,
+        musicAudio: cc.AudioSource,
+
+        scrollview: cc.ScrollView,
     },
 
     onLoad() {
@@ -14,28 +20,47 @@ cc.Class({
             this.adjustSize();
         });
         this.adjustSize();
+        this.hideScrollbar();
+
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
-        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onUnlockNextLevel.bind(this));
+        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.unlockNextLevel.bind(this));
+
+        Emitter.instance.registerEvent('musicVolumeChanged', this.onReceiveChangeMusic.bind(this));
+        Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
     },
 
     onSelectedLevel(data) {
+        console.log(data);
+        this.gameScreen.children[0].getComponent('gameController').startGame(data);
         this.levelScreen.active = false;
-        // this.gameScreen.getComponent('gameController')._level = data;
         this.gameScreen.active = true;
+        // this.gameScreen.getComponent('gameController').startGame();
+    },
 
-        let length = this.gameScreen.children.length;
-        for (let i = 0; i < length; i++) {
-            let name = this.gameScreen.children[i]._name;
-            if (name == data) {
-                this.gameScreen.children[i].active = true;
-            }
+    unlockNextLevel(data) {
+        var value = cc.sys.localStorage.getItem('unlock');
+        value = parseInt(value);
+        if (data < value) {
+            cc.sys.localStorage.setItem('unlock', value);
+        } else {
+            cc.sys.localStorage.setItem('unlock', data + 1);
         }
+        this.levelScreen.getComponent('levelController').loadLevel();
     },
-    onUnlockNextLevel() {
-        this.gameScreen.active = false;
-        this.levelScreen.active = true;
+
+    onChangeMusic(volume) {
+        this.musicSliderPrefab.progress = volume;
+        this.musicAudio.volume = volume;
+        cc.log('Received music volume change from script 1:', volume);
     },
+
+    onReceiveChangeMusic(volume) {
+        this.musicSlider.progress = volume;
+        this.musicAudio.volume = volume;
+        cc.log('Received music volume change from script 2:', volume);
+    },
+
     adjustSize() {
         let screenSize = cc.view.getVisibleSize();
         let ratio = screenSize.width / screenSize.height;
@@ -52,4 +77,9 @@ cc.Class({
         this.node.width = newWidth;
         this.node.height = newHeight;
     },
+
+    hideScrollbar() {
+        this.scrollview.horizontalScrollBar = null;
+        this.scrollview.verticalScrollBar = null;
+    }
 });

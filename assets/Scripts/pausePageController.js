@@ -75,7 +75,7 @@ cc.Class({
 
     },
 
-    onBack(){
+    onBack() {
         this.node.active = false;
     },
     onBackMainMenu(){
