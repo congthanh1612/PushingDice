@@ -15,6 +15,7 @@ cc.Class({
         btnHolder: cc.Node,
         popupGameWin: cc.Node,
         popupGameOver: cc.Node,
+        popupSettings: cc.Node,
         _level: 0,
         _isShow: false,
     },
@@ -65,5 +66,11 @@ cc.Class({
         this.popupSettings.active = false;
         this.btnHolder.active = false;
     },
+
+    backLevelScreen(){
+        this.node.parent.active = false;
+        this.levelScreen.active = true;
+        this.hidePopup();
+    }
 
 });

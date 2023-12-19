@@ -98,12 +98,11 @@ cc.Class({
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
-                            // alert('You Win')
                             Emitter.instance.emit('COMPLETE_LEVEL', this.currentLevel);
                             this.node.active = false;
                         }
                         else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
-                            alert('you lose')
+                            Emitter.instance.emit('GAME_OVER', this.currentLevel);
                             this.node.active = false;
 
                         };
