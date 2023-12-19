@@ -6,11 +6,15 @@ cc.Class({
         levelUnlock: cc.SpriteFrame,
         content: cc.Node,
         prefabLevel: cc.Prefab,
+        scrollView: cc.ScrollView,
         _countLevel: 50
     },
+    
     onLoad() {
         this._countLevel = 50;
+        this.hideScrollBar();
     },
+
     onBack() {
         this.node.active = false;
         this.loginScreen.active = true;
@@ -35,4 +39,8 @@ cc.Class({
             this.content.addChild(newLevel);
         }
     },
+
+    hideScrollBar() {
+        this.scrollView.verticalScrollBar = null;
+    }
 });

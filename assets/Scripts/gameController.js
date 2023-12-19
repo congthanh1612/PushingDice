@@ -21,7 +21,7 @@ cc.Class({
         popupSettings: cc.Node,
         popupGameOver: cc.Node,
         popupWinGame: cc.Node,
-
+        
         diceFace: {
             type: [cc.Label],
             default: [],

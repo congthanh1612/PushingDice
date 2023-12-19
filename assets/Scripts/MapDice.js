@@ -1,6 +1,6 @@
 class MapDice {
     constructor(firstRow, secondRow, thirdRow) {
-        this.firstRow = firstRow,
+            this.firstRow = firstRow,
             this.secondRow = secondRow,
             this.thirdRow = thirdRow,
             this.diceFace = this.secondRow[1]
