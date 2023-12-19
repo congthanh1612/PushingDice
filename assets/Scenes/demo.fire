@@ -159,7 +159,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 498.8306325798367
+      "z": 525.6774200971543
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -286,6 +286,39 @@
     "diceController": {
       "__id__": 8
     },
+    "levels": [
+      {
+        "__uuid__": "78ac597a-65fb-4168-971f-c56be4c44019"
+      },
+      {
+        "__uuid__": "083e7fbb-3903-4c73-b532-18fc9782a2c7"
+      },
+      {
+        "__uuid__": "bcd106fc-ee35-438f-b40e-6fb8c8a67310"
+      },
+      {
+        "__uuid__": "29d0f9d1-c9ca-4f64-b730-37b975af7859"
+      },
+      {
+        "__uuid__": "df92a995-e3dd-487c-8129-6c6ad90fd809"
+      },
+      {
+        "__uuid__": "657562b1-0e4b-426c-822d-f2510b11db25"
+      },
+      {
+        "__uuid__": "5b7120a5-b997-4631-ac3e-edea6f025a96"
+      },
+      {
+        "__uuid__": "df452b38-eba9-41ca-9e94-072a7af88779"
+      },
+      {
+        "__uuid__": "4394ee1f-a548-4d2b-bf64-cc16385d161a"
+      },
+      {
+        "__uuid__": "388f641c-dff9-4aa5-8843-8f450d72874b"
+      }
+    ],
+    "_level": 0,
     "_id": "60yxRNBtNODb6tUNzRj5MW"
   },
   {
@@ -2044,11 +2077,7 @@
     "spriteDestination": {
       "__uuid__": "cf5b94e5-a930-4de9-8693-7ce96e355e82"
     },
-    "loadMap": [
-      {
-        "__uuid__": "4a2b6a84-0716-443c-8f81-a55e1b3ff9c3"
-      }
-    ],
+    "map": null,
     "_id": "237O08f0hL4JCvQnCttWBY"
   },
   {

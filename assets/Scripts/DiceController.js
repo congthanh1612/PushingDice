@@ -22,15 +22,6 @@ cc.Class({
         }
     },
 
-    onLoad() {
-        // this.dice=new Dice(  [0,3,0],   
-        //                         [5,1,2],
-        //                         [0,4,0]);
-        // this.countMove = 16;
-        // this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
-        // this.newMap = this.map.getComponent('MapController').createMapWithCsv(0);
-        // this.posStart = this.map.getComponent('MapController').renderMap(this.newMap);  
-    },
     createDice(data){
         this.dice=new Dice( data['firstRow'],   
                             data['secondRow'],
@@ -40,8 +31,14 @@ cc.Class({
         this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;   
         this.posStart = data['start'];
         this.newMap=this.map.getComponent('MapController').map;
+        this.destination = {                               
+            row: data['destination'][0],
+            col: data['destination'][1]
+        };
     },
-    setupDice(pos) {
+
+    setupDice(pos) { 
+        this.diceResult = 6;
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.node.position = this.tilesMap[pos[0]][pos[1]].position;
         this.currentDicePos = {
@@ -56,7 +53,7 @@ cc.Class({
         this.btnHolder.active = false;
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
-
+        // cc.log(this.newMap.destination[0])
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
                 if (col > 0) {
@@ -88,7 +85,6 @@ cc.Class({
             row,
             col
         };
-
         this.isMovingDice = true;
         if (-1 < row < this.newMap.rows && -1 < col < this.newMap.cols) {
             const targetPosition = this.tilesMap[row][col].position;
@@ -98,11 +94,11 @@ cc.Class({
                     cc.callFunc(() => {
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-                        if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === 6) {
+                        if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
                             alert('You Win')
                             this.node.active = false;
                         }
-                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() != 6 || this.countMove === 0) {
+                        else if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() != this.diceResult || this.countMove === 0) {
                             alert('you lose')
                             this.node.active = false;
                             
@@ -121,6 +117,7 @@ cc.Class({
     showBtnDirection() {
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
+        this.btnHolder.emit("UPDATE_DICE_COLOR", this.currentDicePos, this.destination, this.getDiceFaces(), this.diceResult);
         this.onDiceFaces();
     },
 
@@ -165,4 +162,5 @@ cc.Class({
     getDiceFace(){
         return this.dice.diceFace;
     }
+
 });

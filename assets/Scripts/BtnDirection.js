@@ -20,6 +20,8 @@ cc.Class({
     onLoad () {
         this.node.on("UPDATE_BTN_CONTROLLER", this.updateBtnController, this);
         this.node.on("UPDATE_DICE_NUMBER", this.updateDiceNumber, this);
+        this.node.on("UPDATE_DICE_COLOR", this.updateColorBtn, this);
+        cc.log('asdas',this.btnLeft)
     },
 
     updateBtnController(currentDicePos, maxCol, maxRow, map) {
@@ -55,6 +57,26 @@ cc.Class({
                 this.btnDown.getComponentInChildren(cc.Label).string = number;
                 break;
         }
-        cc.log(DICE_DIRECTION.LEFT,this.btnLeft.getComponentInChildren(cc.Label).string )
-    }
+    },
+    updateColorBtn(currentPos, desPos, currentDices, diceResult) {
+        this.btnLeft.color = cc.Color.BLUE;
+        this.btnRight.color = cc.Color.BLUE;
+        this.btnUp.color = cc.Color.BLUE;
+        this.btnDown.color = cc.Color.BLUE;
+
+        const isDestinationOnLeft = currentPos.col - 1 == desPos.col && currentPos.row == desPos.row;
+        const isDestinationOnRight = currentPos.col + 1 == desPos.col && currentPos.row == desPos.row;
+        const isDestinationAbove = currentPos.row - 1 == desPos.row && currentPos.col == desPos.col;
+        const isDestinationBelow = currentPos.row + 1 == desPos.row && currentPos.col == desPos.col;
+
+        if (isDestinationOnLeft) {
+            this.btnLeft.color = currentDices[DICE_DIRECTION.LEFT - 1] == diceResult ? cc.Color.GREEN : cc.Color.RED;
+        } else if (isDestinationOnRight) {
+            this.btnRight.color = currentDices[DICE_DIRECTION.RIGHT - 1] == diceResult ? cc.Color.GREEN : cc.Color.RED;
+        } else if (isDestinationAbove) {
+            this.btnUp.color = currentDices[DICE_DIRECTION.UP - 1] == diceResult ? cc.Color.GREEN : cc.Color.RED;
+        } else if (isDestinationBelow) {
+            this.btnDown.color = currentDices[DICE_DIRECTION.DOWN - 1] == diceResult ? cc.Color.GREEN : cc.Color.RED;
+        }
+    },
 });
