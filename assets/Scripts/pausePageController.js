@@ -8,7 +8,6 @@ cc.Class({
         soundSliderPrefab :cc.Slider,
         musicSliderPrefab:cc.Slider,
         LoginPage:cc.Layout,
-        musicAudio:cc.AudioSource,
         musicLabel:cc.Label,
         musicButton:cc.Button,
 
@@ -86,21 +85,19 @@ cc.Class({
     },
 
     onSendMusicSliderChange(event) {
+        Emitter.instance.emit("playMusic");
         const newVolume = event.progress;
         cc.sys.localStorage.setItem('volumeMusic',newVolume.toFixed(1) * 10)
-        this.musicAudio.volume = newVolume;
         this.musicLabel.string = newVolume.toFixed(1) * 10;
         const spriteFrame = (newVolume === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
-        //Emitter.instance.emit('musicVolumeChanged', { volume: newVolume, spriteFrame: spriteFrame });
     },
 
     onMusicPauseButtonClick() {
         Emitter.instance.emit("clickSound");
         const currentValue = this.musicSliderPrefab.progress;
         const newValue = (currentValue === 0) ? 1 : 0;
-        const spriteFrame = (newValue === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         if (newValue === 0) {
             this.musicButton.getComponent(cc.Sprite).spriteFrame = this.musicButtonOffSprite;
             cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButtonOffSprite.name)
@@ -109,19 +106,14 @@ cc.Class({
             cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButtonOnSprite.name)
         }
         this.musicSliderPrefab.progress = newValue;
-        this.musicAudio.volume = newValue;
         this.musicLabel.string = newValue.toFixed(1) * 10;
         cc.sys.localStorage.setItem('volumeMusic',newValue.toFixed(1) * 10)
-
-      //  Emitter.instance.emit('musicVolumeChanged', { volume: newValue, spriteFrame: spriteFrame });
+        Emitter.instance.emit("playMusic");
     },
     loadDataMusic(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeMusic');
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrameMusic')
         if(volumeLocal==null)volumeLocal=1;
-        if (volumeLocal !== 0) {
-            this.musicAudio.volume = volumeLocal;
-        }
         if(spriteFrameName==null)spriteFrameName=this.musicButtonOffSprite;
         this.musicLabel.string=volumeLocal;
         if (spriteFrameName === this.musicButtonOnSprite.name) {
@@ -133,6 +125,4 @@ cc.Class({
         }
         this.musicSliderPrefab.progress=volumeLocal/10;
     }
-
-    // update (dt) {},
 });

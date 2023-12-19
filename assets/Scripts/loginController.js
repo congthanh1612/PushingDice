@@ -14,22 +14,15 @@ cc.Class({
         soundButton:cc.Button,
         soundButtonOffSprite:cc.SpriteFrame,
         soundButtonOnSprite:cc.SpriteFrame,
+        title:cc.Label,
 
     },
     onLoad () {
-        this.nameEditBox.node.on(cc.Node.EventType.TOUCH_START, this.onEditBoxClick, this);
         this.soundSlider.node.on('slide',this.onChangeSound.bind(this))
         this.soundButton.node.on('click', this.onButtonClickSound, this);
-
-       
-    },
-    onEditBoxClick() {
-        Emitter.instance.emit("playMusic");
-        this.warningLabel.node.active = false;
-        
     },
 
-    start () {
+    start () { 
 
     },
 
@@ -70,7 +63,7 @@ cc.Class({
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrame')
         cc.log(spriteFrameName);
         if(volumeLocal==null)volumeLocal=1;
-        this.soundButton.string=volumeLocal;
+        this.soundLabel.string=volumeLocal;
         if (spriteFrameName === this.soundButtonOnSprite.name) {
             this.soundButton.getComponent(cc.Sprite).spriteFrame = this.soundButtonOnSprite;
         } else if (spriteFrameName === this.soundButtonOffSprite.name) {
@@ -84,12 +77,6 @@ cc.Class({
     onSubmit(){
         Emitter.instance.emit("playMusic");
         Emitter.instance.emit("clickSound");
-        if(this.nameEditBox.string === ""){
-            return this.warningLabel.node.active = true;
-        }
-        this.player ={
-            namePlayer:this.nameEditBox.string,
-        }
         this.node.active = false;
         this.levelScreen.active = true;
         
@@ -117,5 +104,4 @@ cc.Class({
             buttons[i].interactable = true;
     }
     }
-    // update (dt) {},
 });
