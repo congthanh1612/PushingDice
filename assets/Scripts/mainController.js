@@ -16,9 +16,7 @@ cc.Class({
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.onUnlockNextLevel.bind(this));
-
         Emitter.instance.registerEvent('musicVolumeChanged', this.onReceiveChangeMusic.bind(this));
-
         Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
 
     },

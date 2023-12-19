@@ -1,4 +1,4 @@
-import { checkArrayInArray2D,readFile } from "./otherProcessing.js";
+import {checkArrayInArray2D } from "./otherProcessing.js";
 var Map = require('Map');
 cc.Class({
     extends: cc.Component,
@@ -7,7 +7,7 @@ cc.Class({
         prefabs: [cc.Prefab],
         tiles: [cc.Node],
         spriteDestination: cc.SpriteFrame,
-        loadMap:[cc.TextAsset]
+        map:null,
     },
 
     // onLoad () {},
@@ -44,7 +44,6 @@ cc.Class({
                 }
             }
         }
-
         return [map.start[0], map.start[1]];
     },
 
@@ -55,17 +54,15 @@ cc.Class({
         }
     },
 
-    createMapWithCsv(index){
-        let data= this.loadMap[index].text;
-        data=readFile(data);
-        let map=new Map();
-        map.setWall(data["wallLeft"], 'left');
-        map.setWall(data["wallRight"], 'right')
-        map.setWall(data["wallTop"], 'top')
-        map.setWall(data["wallBottom"], 'bottom')
-        map.setStart(data["start"]);
-        map.setDestination(data["destination"]);
-        return map
+    createMapWithCsv(data){
+        this.map=new Map();
+        this.map.setWall(data["wallLeft"], 'left');
+        this.map.setWall(data["wallRight"], 'right')
+        this.map.setWall(data["wallTop"], 'top')
+        this.map.setWall(data["wallBottom"], 'bottom')
+        this.map.setStart(data["start"][0],data["start"][1]);
+        this.map.setDestination(data["destination"][0],data["destination"][1]);
+        return this.map
     },
     
 });
