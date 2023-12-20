@@ -59,24 +59,28 @@ cc.Class({
         // cc.log(this.newMap.destination[0])
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
+                Emitter.instance.emit('dice')
                 if (col > 0) {
                     col -= 1;
                     this.Left();
                 }
                 break;
             case DICE_DIRECTION.RIGHT:
+                Emitter.instance.emit('dice')
                 if (col < this.newMap.cols - 1) {
                     col += 1;
                     this.Right()
                 }
                 break;
             case DICE_DIRECTION.UP:
+                Emitter.instance.emit('dice')
                 if (row > 0) {
                     row -= 1;
                     this.Up()
                 }
                 break;
             case DICE_DIRECTION.DOWN:
+                Emitter.instance.emit('dice')
                 if (row < this.newMap.rows - 1) {
                     row += 1;
                     this.Down()
@@ -95,20 +99,19 @@ cc.Class({
                 this.node.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
+                        this.showBtnDirection();
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
-                            // alert('You Win')
-                            Emitter.instance.emit('COMPLETE_LEVEL', this.currentLevel);
-                            this.node.active = false;
+                            this.playEndGame(true);
                         }
-                        else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
-                            alert('you lose')
-                            this.node.active = false;
-
+                        else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult) {
+                            this.playEndGame();
+                        }else if(this.countMove === 0){
+                            Emitter.instance.emit('GAME_OVER', this.currentLevel);
                         };
                         this.isMovingDice = false;
-                        this.showBtnDirection();
+                        
                     })
                 ));
             }
@@ -116,6 +119,48 @@ cc.Class({
                 cc.error("ô trên không hợp lệ.");
             }
         }
+    },
+
+    playEndGame(isWin) {
+        this.onBlackHole();
+        this.node.runAction(cc.sequence(
+            cc.delayTime(1),
+            cc.callFunc(() => {
+                if (isWin) {
+                    Emitter.instance.emit('COMPLETE_LEVEL', this.currentLevel);
+                    this.node.active = false;
+                } else {
+                    Emitter.instance.emit('GAME_OVER', this.currentLevel);
+                    this.node.active = false;
+
+                };
+                this.isMovingDice = false;
+                this.showBtnDirection();
+            })
+        ));
+    },
+
+    onBlackHole() {
+        Emitter.instance.emit('blackHole')
+        this.node.x += 40;
+        this.node.y -= 40;
+        this.node.oldAnchorX = this.node.anchorX;
+        this.node.oldAnchorY = this.node.anchorY;
+        this.node.anchorX = 0.5;
+        this.node.anchorY = 0.5;
+        this.btnHolder.active = false;
+        let rotateAction = cc.rotateBy(1, 360).repeatForever();
+        let scaleAction = cc.scaleTo(1, 0, 0);
+        let spawnAction = cc.spawn(rotateAction, scaleAction);
+        this.node.runAction(cc.sequence(
+            spawnAction,
+            cc.callFunc(() => {
+                this.node.scale = 1;
+                this.node.angle = 0;
+                this.node.anchorX = this.node.oldAnchorX;
+                this.node.anchorY = this.node.oldAnchorY;
+            })
+        ));
     },
     showBtnDirection() {
         this.btnHolder.active = true;
@@ -164,6 +209,6 @@ cc.Class({
     },
     getDiceFace() {
         return this.dice.diceFace;
-    }
+    },
 
 });

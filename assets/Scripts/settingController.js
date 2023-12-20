@@ -11,6 +11,8 @@ cc.Class({
         musicButton: cc.Button,
         musicButtonOffSprite: cc.SpriteFrame,
         musicButtonOnSprite: cc.SpriteFrame,
+        gameScreen:cc.Node,
+        levelScreen:cc.Node,
 
 
     },
@@ -23,19 +25,16 @@ cc.Class({
     start() {
 
     },
-    onBack() {
-        this.node.active = false;
-        this.loginPage.node.active = true;
-    },
 
     onPauseButtonBoard() {
+        Emitter.instance.emit("clickSound");
         this.pausePage.getComponent('pausePageController').loadData();
         this.pausePage.getComponent('pausePageController').loadDataMusic();
         this.pausePage.node.active = true;
     },
 
     onSendMusicSliderChange() {
-        Emitter.instance.emit("playMusic");
+        Emitter.instance.emit("changeVolume");
         const newVolume = this.musicSlider.progress;
         cc.sys.localStorage.setItem('volumeMusic', newVolume.toFixed(1) * 10)
         this.musicLabel.string = newVolume.toFixed(1) * 10;
@@ -58,7 +57,7 @@ cc.Class({
         this.musicSlider.progress = newValue;
         this.musicLabel.string = newValue.toFixed(1) * 10;
         cc.sys.localStorage.setItem('volumeMusic', newValue.toFixed(1) * 10);
-        Emitter.instance.emit("playMusic");
+        Emitter.instance.emit("changeVolume");
     },
 
     loadDataMusic() {

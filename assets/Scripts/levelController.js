@@ -1,3 +1,4 @@
+const Emitter = require('mEmitter');
 cc.Class({
     extends: cc.Component,
 
@@ -16,11 +17,13 @@ cc.Class({
     },
 
     onBack() {
+        Emitter.instance.emit("clickSound");
         this.node.active = false;
         this.loginScreen.active = true;
     },
 
     loadLevel() {
+        Emitter.instance.emit("clickSound");
         this.content.removeAllChildren();
         // cc.sys.localStorage.removeItem('unlock');
         var retrievedValue = cc.sys.localStorage.getItem('unlock');

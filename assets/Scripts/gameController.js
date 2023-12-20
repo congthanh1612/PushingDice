@@ -1,23 +1,34 @@
 var Map = require('Map');
 const Emitter = require('mEmitter');
-import {readFile } from "./otherProcessing.js";
+import { log } from "console";
+import { readFile } from "./otherProcessing.js";
+
 cc.Class({
     extends: cc.Component,
 
     properties: {
         map: cc.Node,
         diceController: cc.Node,
-        levels:[cc.TextAsset],
-        _level: 0
+        levelScreen: cc.Node,
+        levels: [cc.TextAsset],
+        diceNode: cc.Node,
+        btnHolder: cc.Node,
+        popupGameWin: cc.Node,
+        popupGameOver: cc.Node,
+        popupSettings: cc.Node,
+        _level: 0,
+        _isShow: false,
     },
     onLoad() {
-        // this.startGame(9);
+        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
+        Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
     },
 
-    startGame(level){
-        this.dataLevel=this.levels[level].text;
-        this.dataLevel=readFile(this.dataLevel);
-        this.dataLevel["level"]=level+1;
+    startGame(level) {
+        this._level = level;
+        this.dataLevel = this.levels[level].text;
+        this.dataLevel = readFile(this.dataLevel);
+        this.dataLevel["level"] = level + 1;
         this.createMap(this.dataLevel);
     },
 
@@ -30,18 +41,39 @@ cc.Class({
         this.dice.setupDice(this.posStart)
     },
 
-    
+    showPopupGameWin() {
+        this.popupGameWin.active = true;
+    },
 
-    // replayGame(event) {
-    //     return this.startGame();
-    // },
+    showPopupGameOver() {
+        this.popupGameOver.active = true;
+    },
 
-    // gameStartState() {
-    //     this.setupDice();
-    //     this.diceController.zIndex = 999
-    //     this.dice.resetDiceFace();
-    //     this.countMove = 16;
-    //     this.moves.getComponent(cc.Label).string = 'Moves: ' + this.countMove;
-    //     this.showBtnDirection();
-    // },
+    reloadGame() {
+        Emitter.instance.emit("clickSound");
+        this.hidePopup();
+        this.startGame(this._level);
+    },
+
+    playNextLevel() {
+        Emitter.instance.emit("clickSound");
+        this.hidePopup();
+        this.startGame(this._level + 1);
+    },
+
+    hidePopup() {
+        this.diceNode.active = true;
+        this.popupGameWin.active = false;
+        this.popupGameOver.active = false;
+        this.popupSettings.active = false;
+        this.btnHolder.active = false;
+    },
+
+    backLevelScreen(){
+        Emitter.instance.emit("clickSound");
+        Emitter.instance.emit('playMusic')
+        this.node.parent.active = false;
+        this.levelScreen.active = true;
+        this.hidePopup();
+    },
 });

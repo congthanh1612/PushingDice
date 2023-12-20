@@ -75,14 +75,13 @@ cc.Class({
     },
 
     onSubmit(){
-        Emitter.instance.emit("playMusic");
         Emitter.instance.emit("clickSound");
         this.node.active = false;
+        this.levelScreen.getComponent('levelController').loadLevel();
         this.levelScreen.active = true;
         
     },
     onShowSettingPage(){
-        Emitter.instance.emit("playMusic");
         Emitter.instance.emit("clickSound");
         this.nameEditBox.enabled = false;
         this.node.opacity = 108;
