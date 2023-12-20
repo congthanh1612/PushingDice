@@ -113,7 +113,6 @@ cc.Class({
                 this.node.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
-                        this.showBtnDirection();
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
@@ -123,8 +122,10 @@ cc.Class({
                             this.playEndGame();
                         }else if(this.countMove === 0){
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
-                        };
-                        this.isMovingDice = false;
+                        } else {
+                            this.isMovingDice = false;
+                        }
+                        this.showBtnDirection();                    
                         this.node.angle=0;
                     })
                 ));
@@ -176,16 +177,15 @@ cc.Class({
                 } else {
                     Emitter.instance.emit('GAME_OVER', this.currentLevel);
                     this.node.active = false;
-
                 };
                 this.isMovingDice = false;
+                this.btnHolder.active = false;
                 this.showBtnDirection();
             })
         ));
     },
 
     onBlackHole() {
-        // if(this.isOnBlackHole) return;
         Emitter.instance.emit('blackHole')
         this.node.oldAnchorX = this.node.anchorX;
         this.node.oldAnchorY = this.node.anchorY;
@@ -206,6 +206,7 @@ cc.Class({
         ));
     },
     showBtnDirection() {
+        if(this.isMovingDice) return;
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
         this.btnHolder.emit("UPDATE_DICE_COLOR", this.currentDicePos, this.destination, this.getDiceFaces(), this.diceResult);
