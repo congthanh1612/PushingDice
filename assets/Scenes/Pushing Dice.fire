@@ -177,7 +177,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 541.2658773652742
+      "z": 615.744062090736
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -3908,7 +3908,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "39871d2f-884c-4e1b-a026-160d9d60bc70"
+      "__uuid__": "dfaa0362-1089-4153-bfc2-668c9d2d09f5"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -3998,7 +3998,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "39871d2f-884c-4e1b-a026-160d9d60bc70"
+      "__uuid__": "dfaa0362-1089-4153-bfc2-668c9d2d09f5"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,
@@ -10600,7 +10600,7 @@
     "_lineHeight": 40,
     "_enableWrapText": true,
     "_N$file": {
-      "__uuid__": "39871d2f-884c-4e1b-a026-160d9d60bc70"
+      "__uuid__": "dfaa0362-1089-4153-bfc2-668c9d2d09f5"
     },
     "_isSystemFontUsed": false,
     "_spacingX": 0,

@@ -1,6 +1,6 @@
-info face="font-moveCount-export" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
+info face="Font-custom-export" size=32 bold=0 italic=0 charset="" unicode=0 stretchH=100 smooth=1 aa=1 padding=0,0,0,0 spacing=1,1
 common lineHeight=120 base=26 scaleW=128 scaleH=2048 pages=1 packed=0 alphaChnl=1 redChnl=0 greenChnl=0 blueChnl=0
-page id=0 file="font-moveCount-export.png"
+page id=0 file="Font-custom-export.png"
 chars count=13
 char id=48 x=0 y=354 width=124 height=178 xoffset=0 yoffset=-58 xadvance=125 page=0 chnl=0 letter="0"
 char id=49 x=0 y=1795 width=61 height=172 xoffset=0 yoffset=-56 xadvance=62 page=0 chnl=0 letter="1"
