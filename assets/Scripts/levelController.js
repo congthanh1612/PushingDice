@@ -23,7 +23,6 @@ cc.Class({
     },
 
     loadLevel() {
-        Emitter.instance.emit("clickSound");
         this.content.removeAllChildren();
         // cc.sys.localStorage.removeItem('unlock');
         var retrievedValue = cc.sys.localStorage.getItem('unlock');

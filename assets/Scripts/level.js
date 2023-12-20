@@ -7,6 +7,7 @@ cc.Class({
 
     selectedLevel() {
         Emitter.instance.emit("clickSound");
+        Emitter.instance.emit("startRound");
         Emitter.instance.emit('playMusicIngame');
         let isLock = this.node.children[0].active;
         if (isLock) {

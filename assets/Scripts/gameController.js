@@ -42,10 +42,12 @@ cc.Class({
     },
 
     showPopupGameWin() {
+        Emitter.instance.emit('levelWin')
         this.popupGameWin.active = true;
     },
 
     showPopupGameOver() {
+        Emitter.instance.emit('levelLose')
         this.popupGameOver.active = true;
     },
 
@@ -57,6 +59,7 @@ cc.Class({
 
     playNextLevel() {
         Emitter.instance.emit("clickSound");
+        Emitter.instance.emit("startRound");
         this.hidePopup();
         this.startGame(this._level + 1);
     },

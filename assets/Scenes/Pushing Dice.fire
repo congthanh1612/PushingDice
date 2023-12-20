@@ -177,7 +177,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 376.7210506462308
+      "z": 376.71262966423325
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -311,7 +311,16 @@
       "__uuid__": "d9e88d81-a4be-4650-9293-8515d0efe95a"
     },
     "blackHole": {
-      "__uuid__": "9888b7a9-70fb-446b-96a4-1ecb68996cbf"
+      "__uuid__": "c6843e42-b399-40af-9fc9-b1f3bfd00962"
+    },
+    "levelWin": {
+      "__uuid__": "0b8d8317-3e45-4eb5-8d6c-d39788fce46d"
+    },
+    "levelLose": {
+      "__uuid__": "04f1abd7-b925-4596-a40f-07dc538d6715"
+    },
+    "startRound": {
+      "__uuid__": "3dcdffa1-de51-4f99-8bb1-3f400b152213"
     },
     "_id": "54nX/AkvtFL4ozsqFAvJAr"
   },
