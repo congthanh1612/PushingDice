@@ -71,6 +71,5 @@ cc.Class({
         this.node.parent.active = false;
         this.levelScreen.active = true;
         this.hidePopup();
-    }
-
+    },
 });

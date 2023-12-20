@@ -25,17 +25,12 @@ cc.Class({
         Emitter.instance = new Emitter();
         Emitter.instance.registerEvent('SELECTED_LEVEL', this.onSelectedLevel.bind(this));
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.unlockNextLevel.bind(this));
-
-        Emitter.instance.registerEvent('musicVolumeChanged', this.onReceiveChangeMusic.bind(this));
-        Emitter.instance.registerEvent('musicVolumeChangedFromScript2', this.onChangeMusic.bind(this));
     },
 
     onSelectedLevel(data) {
-        console.log(data);
         this.gameScreen.children[0].getComponent('gameController').startGame(data);
         this.levelScreen.active = false;
         this.gameScreen.active = true;
-        // this.gameScreen.getComponent('gameController').startGame();
     },
 
     unlockNextLevel(data) {
@@ -47,18 +42,6 @@ cc.Class({
             cc.sys.localStorage.setItem('unlock', data + 1);
         }
         this.levelScreen.getComponent('levelController').loadLevel();
-    },
-
-    onChangeMusic(volume) {
-        this.musicSliderPrefab.progress = volume;
-        this.musicAudio.volume = volume;
-        cc.log('Received music volume change from script 1:', volume);
-    },
-
-    onReceiveChangeMusic(volume) {
-        this.musicSlider.progress = volume;
-        this.musicAudio.volume = volume;
-        cc.log('Received music volume change from script 2:', volume);
     },
 
     adjustSize() {

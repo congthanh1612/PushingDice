@@ -57,7 +57,6 @@ cc.Class({
     },
 
     createMapWithCsv(data){
-        console.log('aaa',data)
         this.map=new Map();
         this.map.setWall(data["wallLeft"], 'left');
         this.map.setWall(data["wallRight"], 'right')
