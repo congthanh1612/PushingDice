@@ -122,6 +122,7 @@ cc.Class({
                             this.playEndGame();
                         }else if(this.countMove === 0){
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
+                            this.isMovingDice = false;
                         } else {
                             this.isMovingDice = false;
                         }
