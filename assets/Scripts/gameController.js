@@ -54,6 +54,7 @@ cc.Class({
     },
 
     reloadGame() {
+        if(this.dice.isMovingDice) return;
         Emitter.instance.emit("clickSound");
         this.hidePopup();
         this.unblockButton();
