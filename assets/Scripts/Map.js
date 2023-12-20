@@ -56,7 +56,7 @@ class Map {
     }
     checkPosition(x, y) {
         if (x >= 0 && y >= 0) {
-            if (x < this.cols && y < this.rows) {
+            if (x < this.rows && y < this.cols) {
                 return true;
             }
         }
