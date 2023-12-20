@@ -59,10 +59,11 @@ cc.Class({
         }
     },
     updateColorBtn(currentPos, desPos, currentDices, diceResult) {
-        this.btnLeft.color = cc.Color.BLUE;
-        this.btnRight.color = cc.Color.BLUE;
-        this.btnUp.color = cc.Color.BLUE;
-        this.btnDown.color = cc.Color.BLUE;
+        var customColor = new cc.Color(0, 255, 224, 255);
+        this.btnLeft.color = customColor;
+        this.btnRight.color = customColor;
+        this.btnUp.color = customColor;
+        this.btnDown.color = customColor;
 
         const isDestinationOnLeft = currentPos.col - 1 == desPos.col && currentPos.row == desPos.row;
         const isDestinationOnRight = currentPos.col + 1 == desPos.col && currentPos.row == desPos.row;
