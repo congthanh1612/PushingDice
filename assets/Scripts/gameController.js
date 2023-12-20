@@ -3,9 +3,6 @@ const Emitter = require('mEmitter');
 import { log } from "console";
 import { readFile } from "./otherProcessing.js";
 
-import { log } from "console";
-import { readFile } from "./otherProcessing.js";
-
 cc.Class({
     extends: cc.Component,
 
@@ -21,28 +18,12 @@ cc.Class({
         popupSettings: cc.Node,
         _level: 0,
         _isShow: false,
-        levelScreen: cc.Node,
-        levels: [cc.TextAsset],
-        diceNode: cc.Node,
-        btnHolder: cc.Node,
-        popupGameWin: cc.Node,
-        popupGameOver: cc.Node,
-        popupSettings: cc.Node,
-        _level: 0,
-        _isShow: false,
     },
     onLoad() {
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
         Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
-        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
-        Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
     },
 
-    startGame(level) {
-        this._level = level;
-        this.dataLevel = this.levels[level].text;
-        this.dataLevel = readFile(this.dataLevel);
-        this.dataLevel["level"] = level + 1;
     startGame(level) {
         this._level = level;
         this.dataLevel = this.levels[level].text;
