@@ -43,18 +43,25 @@ cc.Class({
 
     showPopupGameWin() {
         Emitter.instance.emit('levelWin')
+        this.blockButton();
         this.popupGameWin.active = true;
     },
 
     showPopupGameOver() {
         Emitter.instance.emit('levelLose')
+        this.blockButton();
         this.popupGameOver.active = true;
     },
 
     reloadGame() {
         Emitter.instance.emit("clickSound");
         this.hidePopup();
+        this.unblockButton();
         this.startGame(this._level);
+    },
+
+    undoMove() {
+        this.dice.undoMove();
     },
 
     playNextLevel() {
@@ -62,6 +69,7 @@ cc.Class({
         Emitter.instance.emit("startRound");
         this.hidePopup();
         this.startGame(this._level + 1);
+        this.unblockButton();
     },
 
     hidePopup() {
@@ -78,5 +86,19 @@ cc.Class({
         this.node.parent.active = false;
         this.levelScreen.active = true;
         this.hidePopup();
+        this.unblockButton();
     },
+
+    blockButton(){
+        let buttons = this.node.parent.getComponentsInChildren(cc.Button);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].interactable = false;
+        }
+    },
+    unblockButton(){
+        let buttons = this.node.parent.getComponentsInChildren(cc.Button);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].interactable = true;
+        }
+    }
 });
