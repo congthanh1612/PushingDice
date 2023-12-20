@@ -1,6 +1,6 @@
 {
   "ver": "2.3.3",
-  "uuid": "df4be3cf-f3e0-47d5-bf52-8a1c2a09308b",
+  "uuid": "9a0de7d7-d78f-4ce5-ac05-81dac29c9e06",
   "type": "sprite",
   "wrapMode": "clamp",
   "filterMode": "bilinear",
@@ -9,10 +9,10 @@
   "packable": true,
   "platformSettings": {},
   "subMetas": {
-    "font-moveCount-export": {
+    "Font-custom-export": {
       "ver": "1.0.4",
-      "uuid": "7914947e-9211-47d6-8a45-40cbbc795d2a",
-      "rawTextureUuid": "df4be3cf-f3e0-47d5-bf52-8a1c2a09308b",
+      "uuid": "2e765f27-52bb-4d37-8a20-fe53c7d3355a",
+      "rawTextureUuid": "9a0de7d7-d78f-4ce5-ac05-81dac29c9e06",
       "trimType": "auto",
       "trimThreshold": 1,
       "rotated": false,
