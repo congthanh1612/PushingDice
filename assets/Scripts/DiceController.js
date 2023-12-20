@@ -104,7 +104,6 @@ cc.Class({
                         else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult || this.countMove === 0) {
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
                             this.node.active = false;
-
                         };
                         this.isMovingDice = false;
                         this.showBtnDirection();
