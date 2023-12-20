@@ -30,6 +30,10 @@ cc.Class({
         Emitter.instance.emit("clickSound");
         this.pausePage.getComponent('pausePageController').loadData();
         this.pausePage.getComponent('pausePageController').loadDataMusic();
+        let buttons = this.gameScreen.getComponentsInChildren(cc.Button);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].interactable = false;
+        }
         this.pausePage.node.active = true;
     },
 

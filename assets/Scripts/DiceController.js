@@ -38,6 +38,7 @@ cc.Class({
             col: data['destination'][1]
         };
         this.currentLevel = data['level'];
+        this.diceMovingSteps = [];
     },
 
     setupDice(pos) {
@@ -48,15 +49,18 @@ cc.Class({
             row: pos[0],
             col: pos[1]
         };
+        this.diceMovingSteps = [];
     },
 
-    moveDice(event, direction) {
+    moveDice(event, direction, isUndo = false) {
         this.tilesMap = this.map.getComponent("MapController").tiles;
         if (this.isMovingDice) return;
         this.btnHolder.active = false;
         let col = this.currentDicePos.col;
         let row = this.currentDicePos.row;
-        // cc.log(this.newMap.destination[0])
+        if (!isUndo) {
+            this.diceMovingSteps.push(direction);
+        }
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
                 Emitter.instance.emit('dice')
@@ -87,7 +91,7 @@ cc.Class({
                 }
                 break;
         }
-
+        this.lastMove = direction;
         this.currentDicePos = {
             row,
             col
@@ -100,24 +104,17 @@ cc.Class({
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.showBtnDirection();
-                        this.showBtnDirection();
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
-                            this.playEndGame(true);
                             this.playEndGame(true);
                         }
                         else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult) {
                             this.playEndGame();
                         }else if(this.countMove === 0){
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
-                        else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult) {
-                            this.playEndGame();
-                        }else if(this.countMove === 0){
-                            Emitter.instance.emit('GAME_OVER', this.currentLevel);
                         };
                         this.isMovingDice = false;
-                        
                         
                     })
                 ));
@@ -126,6 +123,35 @@ cc.Class({
                 cc.error("ô trên không hợp lệ.");
             }
         }
+    },
+
+    undoMove() {
+        this.moves.active = false;
+        if (!this.diceMovingSteps || !this.diceMovingSteps.length || !this.diceMovingSteps[this.diceMovingSteps.length - 1]) {
+            cc.error("Không có lượt chơi trước");
+            return;
+        }
+        this.countMove++ ;
+        this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
+        const direction = this.diceMovingSteps.pop();
+        switch (Number(direction)) {
+            case DICE_DIRECTION.LEFT:
+                this.moveDice(null, DICE_DIRECTION.RIGHT, true);
+                this.countMove++ ;
+                break;
+            case DICE_DIRECTION.RIGHT:
+                this.moveDice(null, DICE_DIRECTION.LEFT, true);
+                this.countMove++ ;
+                break;
+            case DICE_DIRECTION.UP:
+                this.moveDice(null, DICE_DIRECTION.DOWN, true);
+                this.countMove++ ;
+                break;
+            case DICE_DIRECTION.DOWN:
+                this.moveDice(null, DICE_DIRECTION.UP, true);
+                this.countMove++ ;
+                break;
+        } 
     },
 
     playEndGame(isWin) {
@@ -216,7 +242,6 @@ cc.Class({
     },
     getDiceFace() {
         return this.dice.diceFace;
-    },
     },
 
 });

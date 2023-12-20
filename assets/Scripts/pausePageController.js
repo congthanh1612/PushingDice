@@ -77,14 +77,22 @@ cc.Class({
 
     onBack() {
         Emitter.instance.emit("clickSound");
+        this.onUnblock();
         this.node.active = false;
     },
     onBackMainMenu(){
         Emitter.instance.emit("clickSound");
         Emitter.instance.emit('playMusic')
+        this.onUnblock();
         this.node.active = false;
         this.gamePage.active = false;
         this.LevelScreen.active = true;
+    },
+    onUnblock(){
+        let buttons = this.gamePage.getComponentsInChildren(cc.Button);
+        for (let i = 0; i < buttons.length; i++) {
+            buttons[i].interactable = true;
+        }
     },
 
     onSendMusicSliderChange(event) {
