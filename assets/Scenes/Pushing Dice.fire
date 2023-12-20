@@ -8764,8 +8764,8 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 1
+      "x": 0.5,
+      "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
@@ -8896,13 +8896,13 @@
     },
     "_anchorPoint": {
       "__type__": "cc.Vec2",
-      "x": 0,
-      "y": 1
+      "x": 0.5,
+      "y": 0.5
     },
     "_position": {
       "__type__": "cc.Vec3",
-      "x": 0,
-      "y": 0,
+      "x": -40,
+      "y": 40,
       "z": 0
     },
     "_scale": {
@@ -10399,8 +10399,81 @@
     },
     "_enabled": true,
     "_defaultClip": null,
-    "_clips": [],
-    "playOnLoad": true,
+    "_clips": [
+      {
+        "__uuid__": "f5311e68-344a-45f0-a38f-3d9fe4307792"
+      },
+      {
+        "__uuid__": "d9ea82ef-e0a2-42b8-a700-184f480dcacf"
+      },
+      {
+        "__uuid__": "65467292-6435-45d0-b755-b20948af7d8c"
+      },
+      {
+        "__uuid__": "676315d9-ff69-47a1-85e9-4b074b5fa1eb"
+      },
+      {
+        "__uuid__": "55e88f24-ca42-47da-bf50-9d87eacfa294"
+      },
+      {
+        "__uuid__": "e1cc04d7-2490-46be-8c5c-5c832f0969e3"
+      },
+      {
+        "__uuid__": "8aac8ead-cac1-4cc2-87d9-02fe5d9beef1"
+      },
+      {
+        "__uuid__": "dc430b09-3e6a-4fb6-bfce-6b405ca3d64a"
+      },
+      {
+        "__uuid__": "bffc9285-6a59-4a8e-9a8c-5388416e86af"
+      },
+      {
+        "__uuid__": "8b3831bd-adb4-4274-9a99-ff2c663163c5"
+      },
+      {
+        "__uuid__": "1db0e923-f1c8-4c8a-95f1-728020a10e8c"
+      },
+      {
+        "__uuid__": "f47e4343-9da9-4d27-be06-8b8afc4d9666"
+      },
+      {
+        "__uuid__": "0e461ebb-c92a-4047-8d35-a23afdd760ac"
+      },
+      {
+        "__uuid__": "1216473c-3c17-431a-8e3c-5bce0c79dab7"
+      },
+      {
+        "__uuid__": "ce255d5a-e806-44d9-8c54-35b956c566b9"
+      },
+      {
+        "__uuid__": "97198442-2c60-4d7a-a574-b424ab9c9631"
+      },
+      {
+        "__uuid__": "21309896-3306-4fe4-8d3b-cb3f99872488"
+      },
+      {
+        "__uuid__": "27a5147b-ce5a-4e13-bc57-b9a28db8e4b4"
+      },
+      {
+        "__uuid__": "eaaa585a-2ba2-431b-87ae-80f680905cb1"
+      },
+      {
+        "__uuid__": "77c187e1-6875-45e4-ac63-a366ce149974"
+      },
+      {
+        "__uuid__": "da7d5325-442f-4ece-b034-54b44a9dd311"
+      },
+      {
+        "__uuid__": "6763664b-b289-43d8-9a79-407cf86f5e3f"
+      },
+      {
+        "__uuid__": "6bc2a735-c8d5-4b26-8f65-f10d028475e7"
+      },
+      {
+        "__uuid__": "ea5c68c8-a145-4c15-aaaf-cd07698f0aae"
+      }
+    ],
+    "playOnLoad": false,
     "_id": "47VkVdonhCvaA3v5bmzBX2"
   },
   {

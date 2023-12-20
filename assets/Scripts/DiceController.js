@@ -45,6 +45,8 @@ cc.Class({
         this.diceResult = 6;
         this.tilesMap = this.map.getComponent("MapController").tiles;
         this.node.position = this.tilesMap[pos[0]][pos[1]].position;
+        this.node.x+=40;
+        this.node.y-=40;
         this.currentDicePos = {
             row: pos[0],
             col: pos[1]
@@ -61,12 +63,14 @@ cc.Class({
         if (!isUndo) {
             this.diceMovingSteps.push(direction);
         }
+        const oldDiceFace=this.dice.diceFace;
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
                 Emitter.instance.emit('dice')
                 if (col > 0) {
                     col -= 1;
                     this.Left();
+                    this.node.angle=270;
                 }
                 break;
             case DICE_DIRECTION.RIGHT:
@@ -74,6 +78,7 @@ cc.Class({
                 if (col < this.newMap.cols - 1) {
                     col += 1;
                     this.Right()
+                    this.node.angle=90;
                 }
                 break;
             case DICE_DIRECTION.UP:
@@ -81,6 +86,7 @@ cc.Class({
                 if (row > 0) {
                     row -= 1;
                     this.Up()
+                    this.node.angle=180;
                 }
                 break;
             case DICE_DIRECTION.DOWN:
@@ -91,6 +97,8 @@ cc.Class({
                 }
                 break;
         }
+        const newDiceFace=this.dice.diceFace;
+        this.node.getComponent(cc.Animation).play(`${oldDiceFace} to ${newDiceFace}`);
         this.lastMove = direction;
         this.currentDicePos = {
             row,
@@ -99,6 +107,8 @@ cc.Class({
         this.isMovingDice = true;
         if (-1 < row < this.newMap.rows && -1 < col < this.newMap.cols) {
             const targetPosition = this.tilesMap[row][col].position;
+            targetPosition.x+=40;
+            targetPosition.y-=40;
             if (targetPosition) {
                 this.node.runAction(cc.sequence(
                     cc.moveTo(0.3, targetPosition),
@@ -115,7 +125,7 @@ cc.Class({
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
                         };
                         this.isMovingDice = false;
-                        
+                        this.node.angle=0;
                     })
                 ));
             }
@@ -126,6 +136,7 @@ cc.Class({
     },
 
     undoMove() {
+        if (this.isMovingDice ) return;
         this.moves.active = false;
         if (!this.diceMovingSteps || !this.diceMovingSteps.length || !this.diceMovingSteps[this.diceMovingSteps.length - 1]) {
             cc.error("Không có lượt chơi trước");
@@ -174,9 +185,8 @@ cc.Class({
     },
 
     onBlackHole() {
+        // if(this.isOnBlackHole) return;
         Emitter.instance.emit('blackHole')
-        this.node.x += 40;
-        this.node.y -= 40;
         this.node.oldAnchorX = this.node.anchorX;
         this.node.oldAnchorY = this.node.anchorY;
         this.node.anchorX = 0.5;
