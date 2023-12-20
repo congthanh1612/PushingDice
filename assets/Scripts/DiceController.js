@@ -59,24 +59,28 @@ cc.Class({
         // cc.log(this.newMap.destination[0])
         switch (Number(direction)) {
             case DICE_DIRECTION.LEFT:
+                Emitter.instance.emit('dice')
                 if (col > 0) {
                     col -= 1;
                     this.Left();
                 }
                 break;
             case DICE_DIRECTION.RIGHT:
+                Emitter.instance.emit('dice')
                 if (col < this.newMap.cols - 1) {
                     col += 1;
                     this.Right()
                 }
                 break;
             case DICE_DIRECTION.UP:
+                Emitter.instance.emit('dice')
                 if (row > 0) {
                     row -= 1;
                     this.Up()
                 }
                 break;
             case DICE_DIRECTION.DOWN:
+                Emitter.instance.emit('dice')
                 if (row < this.newMap.rows - 1) {
                     row += 1;
                     this.Down()
@@ -96,17 +100,24 @@ cc.Class({
                     cc.moveTo(0.3, targetPosition),
                     cc.callFunc(() => {
                         this.showBtnDirection();
+                        this.showBtnDirection();
                         this.countMove--;
                         this.moves.getComponent(cc.Label).string = `${this.countMove}/${this._totalMove}`;
                         if (row === this.newMap.destination[0] && col === this.newMap.destination[1] && this.getDiceFace() === this.diceResult) {
+                            this.playEndGame(true);
                             this.playEndGame(true);
                         }
                         else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult) {
                             this.playEndGame();
                         }else if(this.countMove === 0){
                             Emitter.instance.emit('GAME_OVER', this.currentLevel);
+                        else if (row === this.destination.row && col === this.destination.col && this.getDiceFace() != this.diceResult) {
+                            this.playEndGame();
+                        }else if(this.countMove === 0){
+                            Emitter.instance.emit('GAME_OVER', this.currentLevel);
                         };
                         this.isMovingDice = false;
+                        
                         
                     })
                 ));
@@ -137,6 +148,7 @@ cc.Class({
     },
 
     onBlackHole() {
+        Emitter.instance.emit('blackHole')
         this.node.x += 40;
         this.node.y -= 40;
         this.node.oldAnchorX = this.node.anchorX;
@@ -204,6 +216,7 @@ cc.Class({
     },
     getDiceFace() {
         return this.dice.diceFace;
+    },
     },
 
 });

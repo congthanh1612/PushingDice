@@ -1,3 +1,4 @@
+const Emitter = require('mEmitter');
 cc.Class({
     extends: cc.Component,
 
@@ -16,6 +17,7 @@ cc.Class({
     },
 
     onBack() {
+        Emitter.instance.emit("clickSound");
         this.node.active = false;
         this.loginScreen.active = true;
     },

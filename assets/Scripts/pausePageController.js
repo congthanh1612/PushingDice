@@ -76,16 +76,19 @@ cc.Class({
     },
 
     onBack() {
+        Emitter.instance.emit("clickSound");
         this.node.active = false;
     },
     onBackMainMenu(){
+        Emitter.instance.emit("clickSound");
+        Emitter.instance.emit('playMusic')
         this.node.active = false;
         this.gamePage.active = false;
         this.LevelScreen.active = true;
     },
 
     onSendMusicSliderChange(event) {
-        Emitter.instance.emit("playMusic");
+        Emitter.instance.emit("changeVolume");
         const newVolume = event.progress;
         cc.sys.localStorage.setItem('volumeMusic',newVolume.toFixed(1) * 10)
         this.musicLabel.string = newVolume.toFixed(1) * 10;
@@ -108,7 +111,7 @@ cc.Class({
         this.musicSliderPrefab.progress = newValue;
         this.musicLabel.string = newValue.toFixed(1) * 10;
         cc.sys.localStorage.setItem('volumeMusic',newValue.toFixed(1) * 10)
-        Emitter.instance.emit("playMusic");
+        Emitter.instance.emit("changeVolume");
     },
     loadDataMusic(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeMusic');
