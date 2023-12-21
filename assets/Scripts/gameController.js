@@ -55,13 +55,14 @@ cc.Class({
 
     reloadGame() {
         if (this.dice.isMovingDice) return;
-        Emitter.instance.emit("clickSound");
+        Emitter.instance.emit("reload");
         this.hidePopup();
         this.unblockButton();
         this.startGame(this._level);
     },
 
     undoMove() {
+        Emitter.instance.emit('back')
         this.dice.undoMove();
     },
 

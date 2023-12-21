@@ -177,7 +177,7 @@
       "__type__": "cc.Vec3",
       "x": 0,
       "y": 0,
-      "z": 615.7350872763981
+      "z": 376.69575150690554
     },
     "_scale": {
       "__type__": "cc.Vec3",
@@ -299,13 +299,13 @@
     },
     "_enabled": true,
     "soundClick": {
-      "__uuid__": "ece3452d-8884-40ea-b2a9-ffe88b6e5857"
+      "__uuid__": "35b2db9e-0fa6-4a54-a78d-33b6952f2680"
     },
     "musicAudio": {
       "__uuid__": "f0fd0f51-c786-4af0-83e2-5ee98f9e180a"
     },
     "musicAudioInGame": {
-      "__uuid__": "dde1f142-5585-4d52-99b3-127c1c3774fa"
+      "__uuid__": "af3f773a-156b-470e-baee-38c797c05746"
     },
     "diceRolling": {
       "__uuid__": "d9e88d81-a4be-4650-9293-8515d0efe95a"
@@ -321,6 +321,12 @@
     },
     "startRound": {
       "__uuid__": "3dcdffa1-de51-4f99-8bb1-3f400b152213"
+    },
+    "reload": {
+      "__uuid__": "da75e350-e59a-46fa-96e2-9e5b746c62b5"
+    },
+    "back": {
+      "__uuid__": "34731022-eb3b-45d9-a539-f6660d42e59c"
     },
     "_id": "54nX/AkvtFL4ozsqFAvJAr"
   },
