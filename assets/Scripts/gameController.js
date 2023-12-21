@@ -16,6 +16,7 @@ cc.Class({
         popupGameWin: cc.Node,
         popupGameOver: cc.Node,
         popupSettings: cc.Node,
+        tutorialPopup: cc.Node,
         _level: 0,
         _isShow: false,
     },
@@ -96,6 +97,15 @@ cc.Class({
         this.levelScreen.active = true;
         this.hidePopup();
         this.unblockButton();
+    },
+
+    closeTutorial(){
+        this.tutorialPopup.active= false;
+        this.unblockButton();
+    },
+    onTutorialPopup() {
+        this.tutorialPopup.active = true;
+        this.blockButton();
     },
 
     blockButton() {
