@@ -39,9 +39,9 @@ cc.Class({
 
     onSendMusicSliderChange() {
         Emitter.instance.emit("changeVolume");
-        const newVolume = this.musicSlider.progress;
-        cc.sys.localStorage.setItem('volumeMusic', newVolume.toFixed(1) * 10)
-        this.musicLabel.string = newVolume.toFixed(1) * 10;
+        const newVolume = this.musicSlider.progress.toFixed(1) * 10
+        cc.sys.localStorage.setItem('volumeMusic', newVolume)
+        this.musicLabel.string = newVolume;
         const spriteFrame = (newVolume === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
