@@ -27,9 +27,9 @@ cc.Class({
     },
 
     onChangeSound(){
-        const volume = this.soundSlider.progress
-        cc.sys.localStorage.setItem('volumeSound',volume.toFixed(1) * 10)
-        this.soundLabel.string = volume.toFixed(1) * 10;
+        const volume = this.soundSlider.progress.toFixed(1) * 10
+        cc.sys.localStorage.setItem('volumeSound',volume)
+        this.soundLabel.string = volume;
         const spriteFrame = (volume === 0) ? this.soundButtonOffSprite : this.soundButtonOnSprite;
         this.soundButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrame', this.soundButton.getComponent(cc.Sprite).spriteFrame.name)

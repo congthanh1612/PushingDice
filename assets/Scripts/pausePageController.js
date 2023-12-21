@@ -31,9 +31,9 @@ cc.Class({
     },
 
     onChangeSound(){
-        const volume = this.soundSliderPause.progress
-        cc.sys.localStorage.setItem('volumeSound',volume.toFixed(1) * 10)
-        this.soundLabelPause.string = volume.toFixed(1) * 10;
+        const volume = this.soundSliderPause.progress.toFixed(1) * 10
+        cc.sys.localStorage.setItem('volumeSound',volume)
+        this.soundLabelPause.string = volume;
         const spriteFrame = (volume === 0) ? this.soundButtonOffSprite : this.soundButtonOnSprite;
         this.soundButtonPause.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrame', this.soundButtonPause.getComponent(cc.Sprite).spriteFrame.name)
@@ -97,9 +97,9 @@ cc.Class({
 
     onSendMusicSliderChange(event) {
         Emitter.instance.emit("changeVolume");
-        const newVolume = event.progress;
-        cc.sys.localStorage.setItem('volumeMusic',newVolume.toFixed(1) * 10)
-        this.musicLabel.string = newVolume.toFixed(1) * 10;
+        const newVolume = event.progress.toFixed(1) * 10;
+        cc.sys.localStorage.setItem('volumeMusic',newVolume)
+        this.musicLabel.string = newVolume;
         const spriteFrame = (newVolume === 0) ? this.musicButtonOffSprite : this.musicButtonOnSprite;
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
