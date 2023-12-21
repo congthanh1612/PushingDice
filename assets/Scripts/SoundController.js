@@ -36,6 +36,14 @@ cc.Class({
             type:cc.AudioClip,
             default:null,
         },
+        reload:{
+            type:cc.AudioClip,
+            default:null,
+        },
+        back:{
+            type:cc.AudioClip,
+            default:null,
+        },
         
         
 
@@ -51,10 +59,24 @@ cc.Class({
         Emitter.instance.registerEvent('levelWin', this.onlevelWin.bind(this));
         Emitter.instance.registerEvent('levelLose', this.onlevelLose.bind(this));
         Emitter.instance.registerEvent('startRound', this.onStartRound.bind(this));
+        Emitter.instance.registerEvent('reload', this.onReload.bind(this));
+        Emitter.instance.registerEvent('back', this.onBack.bind(this));
         this.onPlayMainMenu();
     },
     onSoundButton() {
         cc.audioEngine.playEffect(this.soundClick, false);
+        let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
+        if (volumeLocal == null) volumeLocal = 1;
+        cc.audioEngine.setEffectsVolume(volumeLocal / 10);
+    },
+    onReload() {
+        cc.audioEngine.playEffect(this.reload, false);
+        let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
+        if (volumeLocal == null) volumeLocal = 1;
+        cc.audioEngine.setEffectsVolume(volumeLocal / 10);
+    },
+    onBack() {
+        cc.audioEngine.playEffect(this.back, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
         if (volumeLocal == null) volumeLocal = 1;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
