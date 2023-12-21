@@ -54,7 +54,7 @@ cc.Class({
     },
 
     reloadGame() {
-        if(this.dice.isMovingDice) return;
+        if (this.dice.isMovingDice) return;
         Emitter.instance.emit("clickSound");
         this.hidePopup();
         this.unblockButton();
@@ -66,11 +66,18 @@ cc.Class({
     },
 
     playNextLevel() {
-        Emitter.instance.emit("clickSound");
-        Emitter.instance.emit("startRound");
-        this.hidePopup();
-        this.startGame(this._level + 1);
-        this.unblockButton();
+        let nextLevel = this._level + 1;
+        let totalLevel = this.levels.length;
+
+        if (nextLevel >= totalLevel) {
+            this.backLevelScreen();
+        } else {
+            Emitter.instance.emit("clickSound");
+            Emitter.instance.emit("startRound");
+            this.hidePopup();
+            this.startGame(nextLevel);
+            this.unblockButton();
+        }
     },
 
     hidePopup() {
@@ -81,7 +88,7 @@ cc.Class({
         this.btnHolder.active = false;
     },
 
-    backLevelScreen(){
+    backLevelScreen() {
         Emitter.instance.emit("clickSound");
         Emitter.instance.emit('playMusic')
         this.node.parent.active = false;
@@ -90,13 +97,13 @@ cc.Class({
         this.unblockButton();
     },
 
-    blockButton(){
+    blockButton() {
         let buttons = this.node.parent.getComponentsInChildren(cc.Button);
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].interactable = false;
         }
     },
-    unblockButton(){
+    unblockButton() {
         let buttons = this.node.parent.getComponentsInChildren(cc.Button);
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].interactable = true;

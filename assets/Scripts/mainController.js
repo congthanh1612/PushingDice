@@ -34,12 +34,23 @@ cc.Class({
     },
 
     unlockNextLevel(data) {
+        let totalLevel = this.gameScreen.children[0].getComponent('gameController').levels.length;
+        let levelUnlock = data + 1;
         var value = cc.sys.localStorage.getItem('unlock');
         value = parseInt(value);
-        if (data < value) {
-            cc.sys.localStorage.setItem('unlock', value);
+
+        if (levelUnlock > totalLevel) {
+            cc.sys.localStorage.setItem('unlock', data);
+            this.levelScreen.children[3].active = true;
+            this.scheduleOnce(() => {
+                this.levelScreen.children[3].active = false;
+            }, 5);
         } else {
-            cc.sys.localStorage.setItem('unlock', data + 1);
+            if (data < value) {
+                cc.sys.localStorage.setItem('unlock', value);
+            } else {
+                cc.sys.localStorage.setItem('unlock', levelUnlock);
+            }
         }
         this.levelScreen.getComponent('levelController').loadLevel();
     },
