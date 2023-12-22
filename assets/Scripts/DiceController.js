@@ -210,12 +210,12 @@ cc.Class({
         if(this.isMovingDice) return;
         this.btnHolder.active = true;
         this.btnHolder.emit("UPDATE_BTN_CONTROLLER", this.currentDicePos, this.newMap.cols, this.newMap.rows, this.newMap);
-        this.btnHolder.emit("UPDATE_DICE_COLOR", this.currentDicePos, this.destination, this.getDiceFaces(), this.diceResult);
+        this.btnHolder.emit("UPDATE_DICE_COLOR", this.currentDicePos, this.destination, this.getFacesText(), this.diceResult);
         this.onDiceFaces();
     },
 
     onDiceFaces() {
-        this.diceFace = this.getDiceFaces().map((str, index) => {
+        this.diceFace = this.getFacesText().map((str, index) => {
             this.btnHolder.emit("UPDATE_DICE_NUMBER", str, index + 1);
         });
     },
@@ -241,8 +241,8 @@ cc.Class({
         this.changeAtlas(this._indexDice);
     },
 
-    getDiceFaces() {
-        return this.dice.setDiceFaces()
+    getFacesText() {
+        return this.dice.setFacesText()
     },
 
     resetDiceFace() {

@@ -34,7 +34,7 @@ class Dice{
         return this.diceFace-1;
     }
 
-    setDiceFaces() {
+    setFacesText() {
         return [this.secondRow[2],this.secondRow[0],this.thirdRow[1], this.firstRow[1]].map(String);
     }
 }
