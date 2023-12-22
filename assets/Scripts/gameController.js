@@ -21,6 +21,10 @@ cc.Class({
         _isShow: false,
     },
     onLoad() {
+        var retrievedValue = cc.sys.localStorage.getItem('unlock');
+        if (retrievedValue == null) {
+            this.tutorialPopup.active = true;
+        }
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
         Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
     },
@@ -40,6 +44,7 @@ cc.Class({
         this.diceController.zIndex = 999;
         this.dice.createDice(dataLevel);
         this.dice.setupDice(this.posStart)
+        cc.log(this.newMap)
     },
 
     showPopupGameWin() {
@@ -100,10 +105,12 @@ cc.Class({
     },
 
     closeTutorial(){
+        Emitter.instance.emit("clickSound");
         this.tutorialPopup.active= false;
         this.unblockButton();
     },
     onTutorialPopup() {
+        Emitter.instance.emit("clickSound");
         this.tutorialPopup.active = true;
         this.blockButton();
     },

@@ -24,7 +24,7 @@ cc.Class({
 
     loadLevel() {
         this.content.removeAllChildren();
-        // cc.sys.localStorage.removeItem('unlock');
+        // cc.sys.localStorage.removeItem('unlock');   
         var retrievedValue = cc.sys.localStorage.getItem('unlock');
         if (retrievedValue == null) retrievedValue = 1;
 
