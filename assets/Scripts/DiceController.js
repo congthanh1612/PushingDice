@@ -244,14 +244,7 @@ cc.Class({
     getFacesText() {
         return this.dice.setFacesText()
     },
-
-    resetDiceFace() {
-        this.dice = new Dice([0, 3, 0],
-            [5, 1, 2],
-            [0, 4, 0]);
-        this._indexDice = 0,
-            this.changeAtlas(this._indexDice);
-    },
+    
     getDiceFace() {
         return this.dice.diceFace;
     },
