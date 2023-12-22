@@ -41,10 +41,11 @@ cc.Class({
 
         if (levelUnlock > totalLevel) {
             cc.sys.localStorage.setItem('unlock', data);
+            this.levelScreen.children[3].children[1].getComponent(cc.Label).string = 'The game is developing';
             this.levelScreen.children[3].active = true;
             this.scheduleOnce(() => {
                 this.levelScreen.children[3].active = false;
-            }, 5);
+            }, 3);
         } else {
             if (data < value) {
                 cc.sys.localStorage.setItem('unlock', value);
