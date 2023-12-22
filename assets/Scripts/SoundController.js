@@ -85,7 +85,7 @@ cc.Class({
         cc.audioEngine.playEffect(this.levelWin, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
         if (volumeLocal == null) volumeLocal = 1;
-        cc.audioEngine.setEffectsVolume(volumeLocal / 10);
+        cc.audioEngine.setEffectsVolume(volumeLocal/3);
     },
     onlevelLose() {
         cc.audioEngine.playEffect(this.levelLose, false);
@@ -103,7 +103,7 @@ cc.Class({
         cc.audioEngine.playEffect(this.blackHole, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
         if (volumeLocal == null) volumeLocal = 1;
-        cc.audioEngine.setEffectsVolume(volumeLocal / 10);
+        cc.audioEngine.setEffectsVolume(volumeLocal / 12);
     },
     onPlayMainMenu() {
         cc.audioEngine.playMusic(this.musicAudio, true);
