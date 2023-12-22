@@ -13,7 +13,7 @@
   },
   {
     "__type__": "cc.Node",
-    "_name": "Level ",
+    "_name": "Level",
     "_objFlags": 0,
     "_parent": null,
     "_children": [
@@ -153,8 +153,8 @@
       }
     ],
     "_useOriginalSize": false,
-    "_string": "",
-    "_N$string": "",
+    "_string": "1",
+    "_N$string": "1",
     "_fontSize": 40,
     "_lineHeight": 40,
     "_enableWrapText": true,
@@ -175,7 +175,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "aa84cbbe-b2f1-49cf-9ada-2e71c590dbbb"
+      "__id__": 0
     },
     "fileId": "51WlHJKMVCQq2YWjq49lmz",
     "sync": false
@@ -308,7 +308,7 @@
       "__id__": 1
     },
     "asset": {
-      "__uuid__": "aa84cbbe-b2f1-49cf-9ada-2e71c590dbbb"
+      "__id__": 0
     },
     "fileId": "d4Wop4Qb1EM7nAWy8JPaJV",
     "sync": false
