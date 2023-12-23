@@ -78,6 +78,7 @@ cc.Class({
     onBack() {
         Emitter.instance.emit("clickSound");
         this.onUnblock();
+        this.gamePage.opacity = 255;
         this.node.active = false;
     },
     onBackMainMenu(){

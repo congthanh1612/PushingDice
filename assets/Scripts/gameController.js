@@ -1,6 +1,5 @@
 var Map = require('Map');
 const Emitter = require('mEmitter');
-import { log } from "console";
 import { readFile } from "./otherProcessing.js";
 
 cc.Class({
@@ -24,6 +23,7 @@ cc.Class({
         var retrievedValue = cc.sys.localStorage.getItem('unlock');
         if (retrievedValue == null) {
             this.tutorialPopup.active = true;
+            this.blockButton();
         }
         Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
         Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
@@ -117,12 +117,14 @@ cc.Class({
 
     blockButton() {
         let buttons = this.node.parent.getComponentsInChildren(cc.Button);
+        this.node.parent.opacity = 108
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].interactable = false;
         }
     },
     unblockButton() {
         let buttons = this.node.parent.getComponentsInChildren(cc.Button);
+        this.node.parent.opacity = 255
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].interactable = true;
         }
