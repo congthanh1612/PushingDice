@@ -31,6 +31,7 @@ cc.Class({
         this.pausePage.getComponent('pausePageController').loadData();
         this.pausePage.getComponent('pausePageController').loadDataMusic();
         let buttons = this.gameScreen.getComponentsInChildren(cc.Button);
+        this.gameScreen.opacity = 108;
         for (let i = 0; i < buttons.length; i++) {
             buttons[i].interactable = false;
         }
