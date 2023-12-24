@@ -25,10 +25,8 @@ cc.Class({
             this.tutorialPopup.active = true;
             this.blockButton();
         }
-        Emitter.instance.registerEvent('COMPLETE_LEVEL', this.showPopupGameWin.bind(this));
-        Emitter.instance.registerEvent('GAME_OVER', this.showPopupGameOver.bind(this));
+        
     },
-
     startGame(level) {
         this._level = level;
         this.dataLevel = this.levels[level].text;
@@ -36,7 +34,6 @@ cc.Class({
         this.dataLevel["level"] = level + 1;
         this.createMap(this.dataLevel);
     },
-
     createMap(dataLevel) {
         this.dice = this.diceController.getComponent("DiceController")
         this.newMap = this.map.getComponent('MapController').createMapWithCsv(dataLevel);
@@ -46,19 +43,6 @@ cc.Class({
         this.dice.setupDice(this.posStart)
         cc.log(this.newMap)
     },
-
-    showPopupGameWin() {
-        Emitter.instance.emit('levelWin')
-        this.blockButton();
-        this.popupGameWin.active = true;
-    },
-
-    showPopupGameOver() {
-        Emitter.instance.emit('levelLose')
-        this.blockButton();
-        this.popupGameOver.active = true;
-    },
-
     reloadGame() {
         if (this.dice.isMovingDice) return;
         Emitter.instance.emit("reload");
@@ -66,12 +50,10 @@ cc.Class({
         this.unblockButton();
         this.startGame(this._level);
     },
-
     undoMove() {
         Emitter.instance.emit('back')
         this.dice.undoMove();
     },
-
     playNextLevel() {
         let nextLevel = this._level + 1;
         let totalLevel = this.levels.length;
@@ -86,7 +68,6 @@ cc.Class({
             this.unblockButton();
         }
     },
-
     hidePopup() {
         this.diceNode.active = true;
         this.popupGameWin.active = false;
@@ -94,7 +75,6 @@ cc.Class({
         this.popupSettings.active = false;
         this.btnHolder.active = false;
     },
-
     backLevelScreen() {
         Emitter.instance.emit("clickSound");
         Emitter.instance.emit('playMusic')
@@ -103,18 +83,11 @@ cc.Class({
         this.hidePopup();
         this.unblockButton();
     },
-
     closeTutorial(){
         Emitter.instance.emit("clickSound");
         this.tutorialPopup.active= false;
         this.unblockButton();
     },
-    onTutorialPopup() {
-        Emitter.instance.emit("clickSound");
-        this.tutorialPopup.active = true;
-        this.blockButton();
-    },
-
     blockButton() {
         let buttons = this.node.parent.getComponentsInChildren(cc.Button);
         this.node.parent.opacity = 108

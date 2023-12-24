@@ -1,4 +1,3 @@
-
 const Emitter = require('mEmitter');
 cc.Class({
     extends: cc.Component,
@@ -44,11 +43,7 @@ cc.Class({
             type:cc.AudioClip,
             default:null,
         },
-        
-        
-
     },
-
     onLoad() {
         Emitter.instance.registerEvent('clickSound', this.onSoundButton.bind(this));
         Emitter.instance.registerEvent('playMusic', this.onPlayMainMenu.bind(this));
@@ -66,43 +61,43 @@ cc.Class({
     onSoundButton() {
         cc.audioEngine.playEffect(this.soundClick, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
     },
     onReload() {
         cc.audioEngine.playEffect(this.reload, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
     },
     onBack() {
         cc.audioEngine.playEffect(this.back, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
     },
     onlevelWin() {
         cc.audioEngine.playEffect(this.levelWin, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal/3);
     },
     onlevelLose() {
         cc.audioEngine.playEffect(this.levelLose, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
     },
     onStartRound() {
         cc.audioEngine.playEffect(this.startRound, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 10);
     },
     onBlackHole() {
         cc.audioEngine.playEffect(this.blackHole, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
         cc.audioEngine.setEffectsVolume(volumeLocal / 12);
     },
     onPlayMainMenu() {
@@ -115,13 +110,13 @@ cc.Class({
     },
     onChangeVolume() {
         let musicLocal = cc.sys.localStorage.getItem('volumeMusic');
-        if (musicLocal == null) musicLocal = 1;
+        if (musicLocal == null) musicLocal = 10;
         cc.audioEngine.setMusicVolume(musicLocal / 10);
     },
     onDiceRolling() {
         cc.audioEngine.playEffect(this.diceRolling, false);
         let volumeLocal = cc.sys.localStorage.getItem('volumeSound');
-        if (volumeLocal == null) volumeLocal = 1;
-        cc.audioEngine.setEffectsVolume(volumeLocal / 10);
+        if (volumeLocal == null) volumeLocal = 10;
+        cc.audioEngine.setEffectsVolume(volumeLocal / 5);
     },
 });

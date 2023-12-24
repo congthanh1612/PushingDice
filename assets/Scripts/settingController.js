@@ -4,40 +4,15 @@ cc.Class({
 
     properties: {
         musicSlider: cc.Slider,
-        soundSlider: cc.Slider,
-        loginPage: cc.Layout,
-        pausePage: cc.Layout,
         musicLabel: cc.Label,
         musicButton: cc.Button,
         musicButtonOffSprite: cc.SpriteFrame,
         musicButtonOnSprite: cc.SpriteFrame,
-        gameScreen:cc.Node,
-        levelScreen:cc.Node,
-
-
     },
     onLoad() {
         this.musicSlider.node.on('slide', this.onSendMusicSliderChange, this);
         this.musicButton.node.on('click', this.onMusicButtonClick, this);
-
     },
-
-    start() {
-
-    },
-
-    onPauseButtonBoard() {
-        Emitter.instance.emit("clickSound");
-        this.pausePage.getComponent('pausePageController').loadData();
-        this.pausePage.getComponent('pausePageController').loadDataMusic();
-        let buttons = this.gameScreen.getComponentsInChildren(cc.Button);
-        this.gameScreen.opacity = 108;
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].interactable = false;
-        }
-        this.pausePage.node.active = true;
-    },
-
     onSendMusicSliderChange() {
         Emitter.instance.emit("changeVolume");
         const newVolume = this.musicSlider.progress.toFixed(1) * 10
@@ -64,11 +39,10 @@ cc.Class({
         cc.sys.localStorage.setItem('volumeMusic', newValue.toFixed(1) * 10);
         Emitter.instance.emit("changeVolume");
     },
-
     loadDataMusic() {
         let volumeLocal = cc.sys.localStorage.getItem('volumeMusic');
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrameMusic')
-        if (volumeLocal == null) volumeLocal = 1;
+        if (volumeLocal == null) volumeLocal = 10;
 
         if (spriteFrameName == null) spriteFrameName = this.musicButtonOffSprite;
         this.musicLabel.string = volumeLocal;

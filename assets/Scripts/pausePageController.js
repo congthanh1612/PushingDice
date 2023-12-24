@@ -3,19 +3,11 @@ cc.Class({
     extends: cc.Component,
 
     properties: {
-        playButton:cc.Button,
-        backButton:cc.Button,
-        soundSliderPrefab :cc.Slider,
         musicSliderPrefab:cc.Slider,
-        LoginPage:cc.Layout,
         musicLabel:cc.Label,
         musicButton:cc.Button,
-
         musicButtonOffSprite:cc.SpriteFrame,
         musicButtonOnSprite:cc.SpriteFrame,
-        LevelScreen:cc.Node,
-        gamePage:cc.Node,
-
         soundSliderPause:cc.Slider,
         soundLabelPause:cc.Label,
         soundButtonPause:cc.Button,
@@ -29,7 +21,6 @@ cc.Class({
         this.soundSliderPause.node.on('slide',this.onChangeSound.bind(this))
         this.soundButtonPause.node.on('click', this.onButtonClickSound, this);
     },
-
     onChangeSound(){
         const volume = this.soundSliderPause.progress.toFixed(1) * 10
         cc.sys.localStorage.setItem('volumeSound',volume)
@@ -39,7 +30,6 @@ cc.Class({
         cc.sys.localStorage.setItem('spriteFrame', this.soundButtonPause.getComponent(cc.Sprite).spriteFrame.name)
         return volume;
     },
-    
     onButtonClickSound(){
         Emitter.instance.emit("clickSound");
         const currentValue = this.onChangeSound();
@@ -60,7 +50,7 @@ cc.Class({
     loadData(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeSound');
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrame')
-        if(volumeLocal==null)volumeLocal=1;
+        if(volumeLocal==null)volumeLocal=10;
         this.soundLabelPause.string=volumeLocal;
         if (spriteFrameName === this.soundButtonOnSprite.name) {
             this.soundButtonPause.getComponent(cc.Sprite).spriteFrame = this.soundButtonOnSprite;
@@ -71,31 +61,6 @@ cc.Class({
         }
         this.soundSliderPause.progress=volumeLocal/10;
     },
-    start () {
-
-    },
-
-    onBack() {
-        Emitter.instance.emit("clickSound");
-        this.onUnblock();
-        this.gamePage.opacity = 255;
-        this.node.active = false;
-    },
-    onBackMainMenu(){
-        Emitter.instance.emit("clickSound");
-        Emitter.instance.emit('playMusic')
-        this.onUnblock();
-        this.node.active = false;
-        this.gamePage.active = false;
-        this.LevelScreen.active = true;
-    },
-    onUnblock(){
-        let buttons = this.gamePage.getComponentsInChildren(cc.Button);
-        for (let i = 0; i < buttons.length; i++) {
-            buttons[i].interactable = true;
-        }
-    },
-
     onSendMusicSliderChange(event) {
         Emitter.instance.emit("changeVolume");
         const newVolume = event.progress.toFixed(1) * 10;
@@ -105,7 +70,6 @@ cc.Class({
         this.musicButton.getComponent(cc.Sprite).spriteFrame = spriteFrame;
         cc.sys.localStorage.setItem('spriteFrameMusic', this.musicButton.getComponent(cc.Sprite).spriteFrame.name)
     },
-
     onMusicPauseButtonClick() {
         Emitter.instance.emit("clickSound");
         const currentValue = this.musicSliderPrefab.progress;
@@ -125,7 +89,7 @@ cc.Class({
     loadDataMusic(){
         let volumeLocal=cc.sys.localStorage.getItem('volumeMusic');
         let spriteFrameName = cc.sys.localStorage.getItem('spriteFrameMusic')
-        if(volumeLocal==null)volumeLocal=1;
+        if(volumeLocal==null)volumeLocal=10;
         if(spriteFrameName==null)spriteFrameName=this.musicButtonOffSprite;
         this.musicLabel.string=volumeLocal;
         if (spriteFrameName === this.musicButtonOnSprite.name) {
